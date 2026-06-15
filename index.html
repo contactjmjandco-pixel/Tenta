@@ -457,8 +457,11 @@ const allLinks = document.querySelectorAll('.toc-link');
 const allSections = document.querySelectorAll('.section-anchor');
 const menuToggle = document.getElementById('menu-toggle');
 function showSection(id) {
+  if (!document.getElementById(id)) return;
   allSections.forEach(section => section.classList.toggle('active-section', section.id === id));
   allLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + id));
+  history.replaceState(null, '', '#' + id);
+  sessionStorage.setItem('activeSection', id);
   closeKriterier();
   document.body.classList.remove('nav-open');
   if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
@@ -470,7 +473,14 @@ allLinks.forEach(link => {
     showSection(link.getAttribute('href').slice(1));
   });
 });
-if (allLinks.length) allLinks[0].classList.add('active');
+function getInitialSectionId() {
+  const hashId = location.hash ? location.hash.slice(1) : '';
+  const storedId = sessionStorage.getItem('activeSection');
+  if (hashId && document.getElementById(hashId)) return hashId;
+  if (storedId && document.getElementById(storedId)) return storedId;
+  return 'oversikt';
+}
+showSection(getInitialSectionId());
 if (menuToggle) {
   menuToggle.addEventListener('click', () => {
     const open = !document.body.classList.contains('nav-open');
@@ -507,6 +517,30 @@ document.addEventListener('keydown', event => {
   const next = event.key === 'ArrowRight' ? Math.min(current + 1, links.length - 1) : Math.max(current - 1, 0);
   if (next !== current) showSection(links[next].getAttribute('href').slice(1));
 });
+let publishedVersion = null;
+async function checkPublishedVersion() {
+  try {
+    const response = await fetch(window.location.pathname + '?v=' + Date.now(), {
+      method: 'HEAD',
+      cache: 'no-store'
+    });
+    const version = response.headers.get('ETag') || response.headers.get('Last-Modified');
+    if (!version) return;
+    if (publishedVersion === null) {
+      publishedVersion = version;
+      return;
+    }
+    if (version !== publishedVersion) {
+      const activeSection = document.querySelector('.section-anchor.active-section');
+      if (activeSection) sessionStorage.setItem('activeSection', activeSection.id);
+      window.location.reload();
+    }
+  } catch (error) {
+    // Local file previews may not allow HEAD requests; ignore silently.
+  }
+}
+checkPublishedVersion();
+setInterval(checkPublishedVersion, 60000);
 </script>
 </body>
 </html>
