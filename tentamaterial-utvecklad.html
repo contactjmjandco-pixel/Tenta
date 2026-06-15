@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tenta Affärsmannaskap - Utvecklad tentamanual</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fbfaf5;
+  --paper:#fffef9;
+  --card:#fff;
+  --text:#1e1e1b;
+  --muted:#5f625f;
+  --hint:#858982;
+  --border:#e2dfd4;
+  --accent:#1f6f5b;
+  --accent-soft:#edf7f3;
+  --k1:#1f6f5b;
+  --k2:#1f5f88;
+  --k3:#9a6a11;
+  --red:#b84a3a;
+  --purple:#6a4c93;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'DM Sans',Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.65;font-size:15px}
+button{font:inherit}
+a{color:inherit}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.mobile-topbar{display:none;position:sticky;top:0;z-index:250;background:var(--paper);border-bottom:1px solid var(--border);padding:.65rem .8rem;align-items:center;gap:.7rem}
+.mobile-topbar strong{font-family:'DM Serif Display',Georgia,serif;font-size:18px;font-weight:400}
+#menu-toggle{border:1px solid var(--border);background:#fff;border-radius:8px;padding:.4rem .65rem;cursor:pointer;color:var(--text)}
+#sidebar{position:fixed;left:0;top:0;width:300px;height:100vh;background:var(--paper);border-right:1px solid var(--border);overflow-y:auto;z-index:200}
+#sidebar-header{padding:.9rem 1rem .8rem;border-bottom:1px solid var(--border)}
+#sidebar-header h2{font-family:'DM Serif Display',Georgia,serif;font-size:18px;font-weight:400;margin:0 0 .2rem}
+#sidebar-header p{margin:.1rem 0 .65rem;font-size:11px;color:var(--hint);letter-spacing:.03em}
+#toc{padding:.75rem 0 1.5rem}
+.toc-group{padding:.78rem 1rem .35rem;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--hint);font-weight:700}
+.toc-link{display:flex;align-items:center;gap:.45rem;padding:.48rem 1rem .48rem 1.1rem;color:var(--muted);text-decoration:none;border-left:3px solid transparent;font-size:13px;line-height:1.25}
+.toc-link:hover{color:var(--text);background:#f3f2ea;border-left-color:#c7c2b5}
+.toc-link.active{color:var(--accent);background:var(--accent-soft);border-left-color:var(--accent);font-weight:700}
+main{margin-left:300px;max-width:1180px;padding:2.2rem 2.5rem 4rem}
+.section-anchor{display:none;scroll-margin-top:2rem;margin-bottom:2.7rem}
+.section-anchor.active-section{display:block}
+.section-title{font-family:'DM Serif Display',Georgia,serif;font-size:36px;font-weight:400;line-height:1.05;margin:0 0 .75rem}
+.lead{font-size:16px;color:var(--muted);max-width:850px;margin:0 0 1.35rem}
+.sub-title{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--hint);margin:1.7rem 0 .75rem}
+.k-badge,.toc-badge{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;font-weight:700;letter-spacing:.05em;flex:0 0 auto}
+.k-badge{font-size:11px;padding:.22rem .55rem;color:#fff}
+.toc-badge{font-size:10px;width:27px;height:20px;color:#fff}
+.k1{background:var(--k1)} .k2{background:var(--k2)} .k3{background:var(--k3)}
+.mix{background:var(--purple)}
+.pill-row{display:flex;flex-wrap:wrap;gap:.45rem;margin:.75rem 0 1.1rem}
+.pill{border:1px solid var(--border);background:#fff;border-radius:999px;padding:.28rem .65rem;font-size:12px;color:var(--muted)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.1rem 1.2rem;margin-bottom:1rem}
+.card-grid{display:grid;gap:.85rem;margin-bottom:1rem}
+.cols2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.cols3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.cols4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.card-color{border-left:4px solid}
+.green{border-left-color:var(--k1);background:#f7fcfa}
+.blue{border-left-color:var(--k2);background:#f5f9fc}
+.yellow{border-left-color:var(--k3);background:#fffaf0}
+.red{border-left-color:var(--red);background:#fff8f6}
+.purple{border-left-color:var(--purple);background:#faf7ff}
+.gray{border-left-color:#7b7f7b;background:#f8f8f4}
+.card-title{font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin:0 0 .35rem}
+.card-text{font-size:13px;color:var(--muted);line-height:1.55}
+.note,.exam,.casebox,.describe,.pdf-link,.answerbox{border-radius:8px;padding:1rem 1.2rem;margin:1rem 0}
+.note{border:1px solid #d7cfb9;background:#fffaf0;color:#4d4637}
+.exam{border:1px solid #bfd8ce;background:#f4fbf8;color:#244940}
+.casebox{border:1px solid #d4d8df;background:#f7f9fb;color:#33404d}
+.describe{border:1px solid #c9d6e2;background:#f6faff;color:#2f4050}
+.pdf-link{border:1px dashed #c8c1b2;background:#fffdf5;color:#504a3c;font-size:13px}
+.answerbox{border:1px solid #d9cfe7;background:#fbf8ff;color:#3f3550}
+.label{display:inline-block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--hint);margin-bottom:.35rem}
+.formula{font-family:Consolas,'Courier New',monospace;background:#f6f3ea;border:1px solid #ded7c8;border-radius:6px;padding:.6rem .75rem;font-size:13px;display:block;margin:.5rem 0;color:#2b2b28;white-space:normal}
+.table-wrap{width:100%;overflow-x:auto;margin:1rem 0;border-radius:8px}
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--border);min-width:640px}
+th,td{text-align:left;vertical-align:top;border-bottom:1px solid var(--border);padding:.76rem .85rem;font-size:13px}
+th{background:#f3f1e8;font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:#555}
+tr:last-child td{border-bottom:0}
+ul,ol{padding-left:1.2rem}
+li{margin:.36rem 0}
+.two-col-list{columns:2;column-gap:2rem}
+.criteria-map{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin:1.2rem 0 1.6rem}
+.criteria-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:1.15rem;position:relative}
+.criteria-card h3{margin:.55rem 0 .45rem;font-size:16px}
+.criteria-card p{font-size:13px;color:var(--muted);margin:.2rem 0 .75rem}
+.timeline{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.85rem;counter-reset:step;margin:1rem 0}
+.timeline article{position:relative;border:1px solid var(--border);background:#fff;border-radius:8px;padding:1rem 1rem 1rem 3rem;min-height:116px}
+.timeline article:before{counter-increment:step;content:counter(step);position:absolute;left:.85rem;top:1rem;width:1.55rem;height:1.55rem;border-radius:50%;background:var(--k2);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
+.process-line{display:flex;flex-wrap:wrap;gap:.55rem;margin:1rem 0}
+.process-line span{background:#fff;border:1px solid var(--border);border-radius:999px;padding:.45rem .7rem;font-size:12px;color:var(--muted)}
+.split-columns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.85rem;margin-bottom:1rem}
+.split-columns .card{margin-bottom:.85rem}
+details.flashcard{background:#fff;border:1px solid var(--border);border-radius:8px;padding:.8rem .95rem;margin:.55rem 0}
+details.flashcard summary{cursor:pointer;font-weight:700;color:var(--text)}
+details.flashcard p{color:var(--muted);font-size:13px;margin:.55rem 0 0}
+#criteria-wrap{position:relative;display:inline-block}
+#kriterier-btn{background:none;border:1px solid #cfcac0;border-radius:6px;padding:4px 11px;font-size:11px;color:var(--muted);cursor:pointer}
+#kriterier-btn:hover,#kriterier-btn:focus{border-color:var(--accent);color:var(--accent);outline:2px solid transparent}
+#kriterier-popup{display:none;position:fixed;left:16px;top:88px;width:340px;max-width:calc(100vw - 32px);background:#fff;border:1.5px solid var(--accent);border-radius:10px;padding:1rem 1.05rem;box-shadow:0 8px 24px rgba(31,111,91,.16);z-index:260;font-size:12px;line-height:1.55;color:#333}
+#kriterier-popup strong{display:block;margin-bottom:.45rem;color:var(--text)}
+#kriterier-popup ol{margin:.25rem 0 0 1.15rem;padding:0}
+@media (max-width:980px){
+  .mobile-topbar{display:flex}
+  #sidebar{transform:translateX(-105%);transition:transform .2s ease;width:min(86vw,320px);box-shadow:8px 0 22px rgba(0,0,0,.08)}
+  body.nav-open #sidebar{transform:translateX(0)}
+  main{margin-left:0;padding:1.25rem 1rem 3rem}
+  .section-title{font-size:30px}
+  .criteria-map,.cols2,.cols3,.cols4,.timeline,.split-columns{grid-template-columns:1fr}
+  .two-col-list{columns:1}
+}
+@media (max-width:560px){
+  body{font-size:14px}
+  #kriterier-popup{top:62px}
+  .card,.note,.exam,.casebox,.describe,.pdf-link,.answerbox{padding:.9rem}
+}
+</style>
+</head>
+<body>
+<header class="mobile-topbar">
+  <button id="menu-toggle" type="button" aria-controls="sidebar" aria-expanded="false">Meny</button>
+  <strong>Affärsmannaskap</strong>
+</header>
+
+<nav id="sidebar" aria-label="Sidomeny för tentamanual">
+  <div id="sidebar-header">
+    <h2>Tenta Affärsmannaskap</h2>
+    <p>Utvecklad tentamanual med K1/K2/K3</p>
+    <div id="criteria-wrap">
+      <button id="kriterier-btn" type="button" aria-expanded="false" aria-controls="kriterier-popup" onclick="toggleKriterier()">Kriterier</button>
+      <div id="kriterier-popup" role="dialog" aria-label="Kunskapskriterier">
+        <strong>Kunskapskriterier</strong>
+        <ol>
+          <li>Den studerande kan redogöra för modeller och metoder som används för att förstå kundbehov och utveckla och bibehålla långsiktiga kundrelationer.</li>
+          <li>Den studerande kan redogöra för en generell försäljningsprocess och principer för lyckade säljsamtal samt förhandlingsteknik och förutsättningar för att genomföra lyckade förhandlingar.</li>
+          <li>Den studerande kan redogöra för grundläggande företagsekonomiska begrepp, modeller och principer, samt grundläggande affärsjuridiska begrepp och principer kring avtalsrätt.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <div id="toc">
+    <div class="toc-group">Start och kriterier</div>
+    <a class="toc-link" href="#oversikt"><span class="toc-badge mix">ALL</span>Översikt och kriteriekarta</a>
+    <a class="toc-link" href="#karna"><span class="toc-badge mix">ALL</span>Affärsmannaskapets kärna</a>
+    <div class="toc-group">Kund och erbjudande</div>
+    <a class="toc-link" href="#kundbehov"><span class="toc-badge k1">K1</span>Kundbehov och behovsanalys</a>
+    <a class="toc-link" href="#fab"><span class="toc-badge k1">K1</span>FAB - kundnytta</a>
+    <a class="toc-link" href="#femp"><span class="toc-badge k1">K1</span>5P - erbjudande</a>
+    <a class="toc-link" href="#kundrelationer"><span class="toc-badge k1">K1</span>Kundrelationer</a>
+    <div class="toc-group">Marknad och strategi</div>
+    <a class="toc-link" href="#marknad"><span class="toc-badge k1">K1</span>Differentiering och målgrupp</a>
+    <a class="toc-link" href="#swot"><span class="toc-badge mix">K1</span>SWOT</a>
+    <a class="toc-link" href="#pestlied"><span class="toc-badge mix">K1</span>PESTLIED</a>
+    <a class="toc-link" href="#affarside"><span class="toc-badge mix">K1</span>Affärsidé</a>
+    <div class="toc-group">Försäljning och förhandling</div>
+    <a class="toc-link" href="#forsaljning"><span class="toc-badge k2">K2</span>Försäljningsprocessen</a>
+    <a class="toc-link" href="#saljsamtal"><span class="toc-badge k2">K2</span>Säljsamtal och frågeteknik</a>
+    <a class="toc-link" href="#invandningar"><span class="toc-badge k2">K2</span>Argument och invändningar</a>
+    <a class="toc-link" href="#forhandling"><span class="toc-badge k2">K2</span>Förhandlingsteknik</a>
+    <div class="toc-group">Ekonomi och kalkyler</div>
+    <a class="toc-link" href="#ekonomi"><span class="toc-badge k3">K3</span>Ekonomiska grunder</a>
+    <a class="toc-link" href="#kalkyler"><span class="toc-badge k3">K3</span>Kalkyler och pris</a>
+    <a class="toc-link" href="#budget"><span class="toc-badge k3">K3</span>Budget och nyckeltal</a>
+    <div class="toc-group">Juridik och avtal</div>
+    <a class="toc-link" href="#juridik"><span class="toc-badge k3">K3</span>Avtalsrätt</a>
+    <a class="toc-link" href="#upphandling"><span class="toc-badge k3">K3</span>Offentlig upphandling</a>
+    <div class="toc-group">Case och repetition</div>
+    <a class="toc-link" href="#case"><span class="toc-badge mix">ALL</span>Integrerade case</a>
+    <a class="toc-link" href="#svarsmallar"><span class="toc-badge mix">ALL</span>Tentafrågor och svarsmallar</a>
+    <a class="toc-link" href="#sista-repetition"><span class="toc-badge mix">ALL</span>Sista repetitionen</a>
+  </div>
+</nav>
+
+<main id="main-content">
+  <section id="oversikt" class="section-anchor active-section" aria-labelledby="oversikt-title">
+    <h1 id="oversikt-title" class="section-title">Översikt och kriteriekarta</h1>
+    <p class="lead">Manualen är byggd som ett studieverktyg. Varje del är kopplad till kunskapskriterierna, kursmaterialets föreläsningsområden och typiska “Beskriv...”-frågor.</p>
+    <div class="pdf-link"><span class="label">Kopplat kursmaterial</span><br>Samlar huvudområden från Affärsmannaskap 1-9 och kunskapskriterierna: kund, försäljning, ekonomi och juridik.</div>
+    <div class="criteria-map" aria-label="Kriteriekarta">
+      <article class="criteria-card"><span class="k-badge k1">K1</span><h3>Kundbehov och relation</h3><p>Kundbehov, kundvärde, FAB, 5P, differentiering och långsiktiga kundrelationer.</p><div class="pill-row"><span class="pill">Kundbehov</span><span class="pill">FAB</span><span class="pill">5P</span><span class="pill">Relation</span></div></article>
+      <article class="criteria-card"><span class="k-badge k2">K2</span><h3>Försäljning och förhandling</h3><p>Försäljningsprocess, säljsamtal, frågeteknik, invändningar och förhandlingsteknik.</p><div class="pill-row"><span class="pill">Säljsamtal</span><span class="pill">Frågor</span><span class="pill">BATNA</span><span class="pill">Avslut</span></div></article>
+      <article class="criteria-card"><span class="k-badge k3">K3</span><h3>Ekonomi och juridik</h3><p>Företagsekonomi, budget, kostnader, intäkter, nyckeltal, avtal och upphandling.</p><div class="pill-row"><span class="pill">Budget</span><span class="pill">TB</span><span class="pill">Avtal</span><span class="pill">Upphandling</span></div></article>
+    </div>
+    <div class="exam"><span class="label">Så skriver du på tenta</span><br>Börja med att definiera begreppet, beskriv modellen eller stegen och tillämpa sedan på ett case. Avsluta med varför det påverkar kundvärde, lönsamhet eller risk.</div>
+  </section>
+
+  <section id="karna" class="section-anchor" aria-labelledby="karna-title">
+    <h2 id="karna-title" class="section-title">Affärsmannaskapets kärna</h2>
+    <p class="lead">Affärsmannaskap är förmågan att skapa affärer som är värdefulla för kunden och hållbara för företaget.</p>
+    <div class="pdf-link"><span class="label">Kopplat kursmaterial</span><br>Bygger på helheten i Affärsmannaskap 1-9: kundförståelse, erbjudande, försäljning, ekonomi, juridik och scenariotänkande.</div>
+    <div class="describe"><span class="label">Beskriv så här</span><br>Affärsmannaskap innebär att kombinera kundförståelse med affärsansvar. Säljaren behöver förstå kundens problem, formulera ett relevant värdeerbjudande, genomföra en professionell försäljning och kontrollera att affären är ekonomiskt och juridiskt hållbar. På tenta är det viktigt att visa balansen mellan kundens nytta och företagets lönsamhet. En affär är inte stark bara för att kunden säger ja, utan också för att leverans, pris, ansvar och risk är rimliga.</div>
+    <div class="card-grid cols3"><article class="card card-color green"><div class="card-title">Kundvärde</div><div class="card-text">Vad kunden får ut av affären: effekt, nytta, trygghet, sparad tid eller minskad risk.</div></article><article class="card card-color blue"><div class="card-title">Säljförmåga</div><div class="card-text">Hur säljaren leder kunden genom frågor, argument, invändningar, förhandling och avslut.</div></article><article class="card card-color yellow"><div class="card-title">Affärsansvar</div><div class="card-text">Att räkna på lönsamhet, förstå risker och säkra tydliga villkor i avtal.</div></article></div>
+    <div class="casebox"><span class="label">Mini-case</span><br>Du driver ett IT-konsultbolag och kunden vill “ha en utvecklare snabbt”. Svarsmall: utred behovet bakom brådskan, koppla konsultens kompetens till affärsnytta, räkna på pris/marginal och skriv tydliga villkor om omfattning, tid och ansvar.</div>
+  </section>
+
+  <section id="kundbehov" class="section-anchor" aria-labelledby="kundbehov-title">
+    <h2 id="kundbehov-title" class="section-title"><span class="k-badge k1">K1</span> Kundbehov och behovsanalys</h2>
+    <p class="lead">Behovsanalys tar fram vad kunden behöver, varför behovet finns och vilka konsekvenser problemet får om det inte löses.</p>
+    <div class="pdf-link"><span class="label">Kopplat kursmaterial</span><br>Kundförståelse från föreläsning 1-2 samt kopplingen till erbjudande, FAB och långsiktig relation.</div>
+    <div class="describe"><span class="label">Beskriv så här</span><br>Kundbehov kan vara uttalade, underliggande eller latenta. Säljaren använder öppna frågor, följdfrågor och sammanfattningar för att förstå kundens situation innan lösningen presenteras. Det är viktigt eftersom rätt behovsanalys gör erbjudandet mer relevant. Ett vanligt tentasvar bör skilja på vad kunden säger att den vill ha och vilket problem kunden egentligen behöver lösa. Behovsanalysen är därför grunden för både kundvärde, argumentation och långsiktig relation.</div>
+    <div class="card-grid cols3"><article class="card card-color green"><div class="card-title">Uttalat behov</div><div class="card-text">Det kunden säger: “vi behöver lägre pris” eller “vi behöver ett nytt system”.</div></article><article class="card card-color yellow"><div class="card-title">Underliggande behov</div><div class="card-text">Det verkliga problemet: risk, tidsspillan, svag uppföljning eller låg kvalitet.</div></article><article class="card card-color blue"><div class="card-title">Latent behov</div><div class="card-text">Ett behov kunden inte själv formulerat men som upptäcks genom analys.</div></article></div>
+    <div class="table-wrap"><table><thead><tr><th>Frågetyp</th><th>Exempel</th><th>Syfte</th></tr></thead><tbody><tr><td>Situationsfråga</td><td>Hur arbetar ni idag?</td><td>Förstå nuläget.</td></tr><tr><td>Problemfråga</td><td>Vad fungerar sämst?</td><td>Hitta smärtpunkter.</td></tr><tr><td>Konsekvensfråga</td><td>Vad kostar problemet i tid eller pengar?</td><td>Göra behovet affärsmässigt.</td></tr><tr><td>Värdefråga</td><td>Vad skulle en bättre lösning ge?</td><td>Koppla till kundnytta.</td></tr></tbody></table></div>
+    <div class="casebox"><span class="label">Case med svarsmall</span><br>Kunden säger att supporten är för dyr. Svarsmall: fråga vad som driver kostnaden, identifiera om problemet är pris, svarstid eller driftstopp, och argumentera sedan för den lösning som ger bäst kundnytta.</div>
+    <div class="exam"><span class="label">Så skriver du på tenta</span><br>Definiera kundbehov, skilj mellan uttalat och underliggande behov och visa hur behovsanalys leder till bättre lösning.</div>
+  </section>
+
+  <section id="fab" class="section-anchor" aria-labelledby="fab-title">
+    <h2 id="fab-title" class="section-title"><span class="k-badge k1">K1</span> FAB - från egenskap till kundnytta</h2>
+    <p class="lead">FAB hjälper dig översätta vad ett erbjudande har till varför kunden faktiskt bryr sig.</p>
+    <div class="pdf-link"><span class="label">Kopplat kursmaterial</span><br>Föreläsning 2: erbjudande, FAB och 5P.</div>
+    <div class="describe"><span class="label">Beskriv så här</span><br>FAB står för Feature, Advantage och Benefit. Modellen används i säljsamtal och argumentation för att gå från egenskap till fördel och slutligen till konkret kundnytta. Feature beskriver vad produkten eller tjänsten har, Advantage beskriver vad egenskapen gör och Benefit beskriver varför det är värdefullt för kunden. På tenta bör du alltid avsluta med kundnyttan, eftersom det visar att du förstår kundens perspektiv.</div>
+    <div class="card-grid cols3"><article class="card card-color gray"><div class="card-title">Feature</div><div class="card-text">Egenskap: “Systemet har automatisk rapportering”.</div></article><article class="card card-color blue"><div class="card-title">Advantage</div><div class="card-text">Fördel: “Ni slipper manuell sammanställning”.</div></article><article class="card card-color green"><div class="card-title">Benefit</div><div class="card-text">Kundnytta: “Ni sparar tid och får bättre beslutsunderlag”.</div></article></div>
+    <div class="casebox"><span class="label">Case med svarsmall</span><br>Du driver ett IT-konsultbolag. Kunden tycker att priset är för högt. Svarsmall: använd FAB genom att lyfta konsultens kompetens som egenskap, snabbare leverans som fördel och minskad projektrisk som kundnytta.</div>
+    <div class="exam"><span class="label">Så skriver du på tenta</span><br>Skriv inte bara “produkten är bra”. Visa hur egenskapen leder till fördel och konkret kundnytta.</div>
+  </section>
+
+  <section id="femp" class="section-anchor" aria-labelledby="femp-title">
+    <h2 id="femp-title" class="section-title"><span class="k-badge k1">K1</span> 5P - erbjudandets marknadsmix</h2>
+    <p class="lead">5P beskriver erbjudandet bredare än själva produkten: vad som säljs, till vilket pris, var kunden möter det, hur det kommuniceras och hur människor/processer skapar leveransen.</p>
+    <div class="pdf-link"><span class="label">Kopplat kursmaterial</span><br>Föreläsning 2: erbjudande, FAB och 5P.</div>
+    <div class="describe"><span class="label">Beskriv så här</span><br>5P används för att analysera erbjudandets marknadsmix. Modellen hjälper företaget att se om produkt, pris, plats, påverkan och personal/process hänger ihop med målgruppens behov. Produkt handlar om vad som erbjuds, pris om betalningsmodell och värde, plats om tillgänglighet, påverkan om kommunikation och personal/process om hur leveransen skapas. Ett bra tentasvar visar hur de fem delarna tillsammans formar kundens upplevelse av erbjudandet.</div>
+    <div class="card-grid cols4"><article class="card"><div class="card-title">Produkt</div><div class="card-text">Vad erbjuds och vilken kvalitet har det?</div></article><article class="card"><div class="card-title">Pris</div><div class="card-text">Hur matchar priset värde, kostnad och konkurrens?</div></article><article class="card"><div class="card-title">Plats</div><div class="card-text">Hur når kunden erbjudandet?</div></article><article class="card"><div class="card-title">Påverkan</div><div class="card-text">Hur kommuniceras värdet?</div></article><article class="card"><div class="card-title">Personal/process</div><div class="card-text">Vilka människor och arbetssätt skapar kundupplevelsen och leveransen?</div></article></div>
+    <div class="casebox"><span class="label">Case med svarsmall</span><br>Du ska paketera ett IT-supporterbjudande. Svarsmall: beskriv tjänstens innehåll som produkt, prissättning, hur kunden får tillgång till supporten, hur värdet kommuniceras och vilken personal/process som säkrar leveransen.</div>
+    <div class="exam"><span class="label">Så skriver du på tenta</span><br>Beskriv varje P kort och visa hur de tillsammans gör erbjudandet tydligare för rätt målgrupp.</div>
+  </section>
+
+  <section id="kundrelationer" class="section-anchor" aria-labelledby="kundrelationer-title">
+    <h2 id="kundrelationer-title" class="section-title"><span class="k-badge k1">K1</span> Kundrelationer och långsiktighet</h2>
+    <p class="lead">Långsiktiga kundrelationer byggs genom förtroende, uppföljning och förmåga att skapa värde även efter köpet. En relation är stark när kunden upplever att leverantören förstår verksamheten, håller löften och tar ansvar även när något går fel.</p>
+    <div class="pdf-link"><span class="label">Kopplat kursmaterial</span><br>Kundrelationer i föreläsning 1-2 samt koppling till erbjudande och kundvärde.</div>
+    <div class="card-grid cols4"><article class="card card-color green"><div class="card-title">Förtroende</div><div class="card-text">Håll löften, var transparent och lös problem snabbt.</div></article><article class="card card-color blue"><div class="card-title">Relevans</div><div class="card-text">Koppla kommunikation och erbjudande till kundens verkliga behov.</div></article><article class="card card-color yellow"><div class="card-title">Uppföljning</div><div class="card-text">Kontrollera effekt, nöjdhet och nya behov.</div></article><article class="card card-color purple"><div class="card-title">Utveckling</div><div class="card-text">Skapa återköp, merförsäljning och rekommendationer.</div></article></div>
+    <div class="casebox"><span class="label">Case med svarsmall</span><br>En leverans blir sen. Svarsmall: informera tidigt, förklara konsekvensen, föreslå alternativ och följ upp efteråt. Det visar ansvar och kan rädda relationen.</div>
+  </section>
+
+  <section id="marknad" class="section-anchor" aria-labelledby="marknad-title">
+    <h2 id="marknad-title" class="section-title"><span class="k-badge k1">K1</span> Differentiering, målgrupp och konkurrens</h2>
+    <p class="lead">Marknadsförståelse gör att företaget väljer rätt kunder och tydliggör varför erbjudandet är bättre än alternativen. På tenta är det viktigt att kunna koppla målgrupp, behov och differentiering till en konkret affärsidé.</p>
+    <div class="pdf-link"><span class="label">Kopplat kursmaterial</span><br>Föreläsning 2-3: erbjudande, differentiering, marknad, SWOT och PEST/PESTLIED.</div>
+    <div class="card-grid cols3"><article class="card"><div class="card-title">Segmentering</div><div class="card-text">Dela marknaden i grupper med liknande behov eller beteenden.</div></article><article class="card"><div class="card-title">Målgrupp</div><div class="card-text">Välj de segment där behov, betalningsvilja och erbjudande passar bäst.</div></article><article class="card"><div class="card-title">Differentiering</div><div class="card-text">Visa hur företaget skiljer sig i pris, kvalitet, service, expertis eller trygghet.</div></article></div>
+    <div class="casebox"><span class="label">Case med svarsmall</span><br>Ett konsultbolag vill rikta sig till “alla företag”. Svarsmall: avgränsa målgruppen, beskriv deras behov och visa vilken konkurrensfördel bolaget har.</div>
+  </section>
+
+  <section id="swot" class="section-anchor" aria-labelledby="swot-title">
+    <h2 id="swot-title" class="section-title"><span class="k-badge mix">K1/K3</span> SWOT</h2>
+    <p class="lead">SWOT används för att analysera ett företags nuläge. Modellen delar upp faktorer i interna styrkor och svagheter samt externa möjligheter och hot. Den är användbar när man ska bedöma en affärsidé, en marknad eller ett företags konkurrensläge.</p>
+    <div class="pdf-link"><span class="label">Kopplat kursmaterial</span><br>Föreläsning 3: SWOT, PEST/PESTLIED och företagsformer.</div>
+    <div class="card-grid cols2"><article class="card card-color green"><div class="card-title">Strengths - styrkor</div><div class="card-text">Interna fördelar, till exempel kompetens, kundrelationer, teknik eller starkt varumärke.</div></article><article class="card card-color red"><div class="card-title">Weaknesses - svagheter</div><div class="card-text">Interna begränsningar, till exempel låg kännedom, svag ekonomi eller brist på personal.</div></article><article class="card card-color blue"><div class="card-title">Opportunities - möjligheter</div><div class="card-text">Externa möjligheter, till exempel växande marknad, ny teknik eller förändrade kundbehov.</div></article><article class="card card-color yellow"><div class="card-title">Threats - hot</div><div class="card-text">Externa risker, till exempel konkurrenter, lågkonjunktur, lagkrav eller teknikskiften.</div></article></div>
+    <div class="casebox"><span class="label">Case med svarsmall</span><br>Ni startar ett IT-konsultbolag. Svarsmall: styrka = teknisk kompetens, svaghet = okänt varumärke, möjlighet = ökad efterfrågan på AI-stöd, hot = etablerade konsultbolag och prispress.</div>
+  </section>
+
+  <section id="pestlied" class="section-anchor" aria-labelledby="pestlied-title">
+    <h2 id="pestlied-title" class="section-title"><span class="k-badge mix">K1/K3</span> PESTLIED</h2>
+    <p class="lead">PESTLIED är en omvärldsanalys. Den hjälper företaget att förstå faktorer utanför den egna verksamheten som kan påverka marknad, kunder, kostnader, regler och framtida affärsmöjligheter.</p>
+    <div class="pdf-link"><span class="label">Kopplat kursmaterial</span><br>Föreläsning 3: PEST/PESTLIED. Föreläsning 9: scenarioplanering och PESTLIED-analys.</div>
+    <div class="split-columns">
+      <div>
+        <article class="card card-color blue"><div class="card-title">P - Politiska faktorer</div><div class="card-text">Beslut, styrning och politiska prioriteringar som påverkar affären, till exempel offentlig digitalisering, skatter, bidrag eller regler för upphandling.</div></article>
+        <article class="card card-color yellow"><div class="card-title">E - Ekonomiska faktorer</div><div class="card-text">Konjunktur, räntor, inflation, kunders budgetar och kostnadsläge. Påverkar betalningsvilja, investeringar och priskänslighet.</div></article>
+        <article class="card card-color green"><div class="card-title">S - Sociala faktorer</div><div class="card-text">Människors beteenden, värderingar och arbetsvanor, till exempel distansarbete, krav på service eller förändrade kundförväntningar.</div></article>
+        <article class="card card-color purple"><div class="card-title">T - Tekniska faktorer</div><div class="card-text">Ny teknik som AI, automatisering, cybersäkerhet och molntjänster. Kan skapa både nya erbjudanden och nya konkurrenter.</div></article>
+      </div>
+      <div>
+        <article class="card card-color red"><div class="card-title">L - Legala faktorer</div><div class="card-text">Lagar och regler, till exempel GDPR, avtalsrätt, arbetsrätt, upphandlingsregler och krav på informationssäkerhet.</div></article>
+        <article class="card card-color gray"><div class="card-title">I - Internationella faktorer</div><div class="card-text">Globala leveranskedjor, valutor, internationell konkurrens, outsourcing och beroende av utländska plattformar eller leverantörer.</div></article>
+        <article class="card card-color green"><div class="card-title">E - Ekologiska faktorer</div><div class="card-text">Miljökrav, hållbarhet, energiförbrukning, återbruk av teknik och kunders krav på klimatansvar.</div></article>
+        <article class="card card-color blue"><div class="card-title">D - Demografiska faktorer</div><div class="card-text">Befolkningens ålder, kompetensförsörjning, urbanisering och tillgång på arbetskraft. Påverkar både kunder och rekrytering.</div></article>
+      </div>
+    </div>
+    <div class="casebox"><span class="label">Case med svarsmall</span><br>AI förändrar konsultmarknaden. Svarsmall: tekniska faktorer skapar nya tjänster, legala faktorer kräver dataansvar, ekonomiska faktorer påverkar kundbudget och sociala faktorer påverkar hur kunder accepterar automatisering.</div>
+  </section>
+
+  <section id="affarside" class="section-anchor" aria-labelledby="affarside-title">
+    <h2 id="affarside-title" class="section-title"><span class="k-badge mix">K1/K3</span> Affärsidé</h2>
+    <p class="lead">Affärsidén beskriver vad företaget gör, för vem, hur det skapar värde och varför kunden ska välja företaget. Den binder ihop kundbehov, erbjudande, målgrupp och företagets resurser.</p>
+    <div class="pdf-link"><span class="label">Kopplat kursmaterial</span><br>Föreläsning 4: vision, mission, värderingar, affärsidé och organisation. Föreläsning 3: företagsformer.</div>
+    <div class="card-grid cols2"><article class="card card-color green"><div class="card-title">Vad?</div><div class="card-text">Vilken produkt eller tjänst erbjuder företaget?</div></article><article class="card card-color blue"><div class="card-title">För vem?</div><div class="card-text">Vilken målgrupp eller kundtyp riktar företaget sig till?</div></article><article class="card card-color yellow"><div class="card-title">Hur?</div><div class="card-text">Hur levereras värdet, till exempel genom kompetens, process, teknik eller relation?</div></article><article class="card card-color purple"><div class="card-title">Varför välja oss?</div><div class="card-text">Vilken kundnytta eller differentiering gör erbjudandet attraktivt?</div></article><article class="card card-color gray"><div class="card-title">Vision och mission</div><div class="card-text">Vision är önskad framtid. Mission är verksamhetens uppdrag.</div></article><article class="card card-color green"><div class="card-title">Organisation och företagsform</div><div class="card-text">Roller, ansvar och juridisk form påverkar hur affärsidén kan genomföras.</div></article></div>
+    <div class="casebox"><span class="label">Case med svarsmall</span><br>Affärsidé för IT-konsultbolag: vi hjälper småföretag med säker och effektiv molndrift genom personlig rådgivning, snabb support och tydliga månadsavtal.</div>
+  </section>
+
+  <section id="forsaljning" class="section-anchor" aria-labelledby="forsaljning-title">
+    <h2 id="forsaljning-title" class="section-title"><span class="k-badge k2">K2</span> Försäljningsprocessen</h2>
+    <p class="lead">Försäljningsprocessen ger struktur från första kundurval till uppföljning efter affär. Den hjälper säljaren att arbeta metodiskt och minskar risken att hoppa direkt till lösning, pris eller avslut innan kundens behov är tydligt.</p>
+    <div class="pdf-link"><span class="label">Kopplat kursmaterial</span><br>Föreläsning 1-2: kundkontakt, erbjudande, säljsamtal och relation.</div>
+    <div class="timeline" aria-label="Försäljningsprocess som tidslinje"><article><div class="card-title">Prospektering</div><div class="card-text">Hitta möjliga kunder.</div></article><article><div class="card-title">Förberedelse</div><div class="card-text">Läs på om kund, behov och beslutsprocess.</div></article><article><div class="card-title">Kontakt</div><div class="card-text">Skapa intresse och boka dialog.</div></article><article><div class="card-title">Behovsanalys</div><div class="card-text">Fråga, lyssna och prioritera behov.</div></article><article><div class="card-title">Presentation</div><div class="card-text">Visa lösning kopplad till behov.</div></article><article><div class="card-title">Invändningar</div><div class="card-text">Förstå och bemöt hinder.</div></article><article><div class="card-title">Avslut</div><div class="card-text">Säkra beslut eller nästa steg.</div></article><article><div class="card-title">Uppföljning</div><div class="card-text">Kontrollera effekt och relation.</div></article></div>
+    <div class="casebox"><span class="label">Case med svarsmall</span><br>En kund ber om offert direkt. Svarsmall: tacka, men gör kort behovsanalys först så offerten matchar kundens problem och beslutskriterier.</div>
+  </section>
+
+  <section id="saljsamtal" class="section-anchor" aria-labelledby="saljsamtal-title">
+    <h2 id="saljsamtal-title" class="section-title"><span class="k-badge k2">K2</span> Säljsamtal och frågeteknik</h2>
+    <p class="lead">Ett lyckat säljsamtal är en strukturerad dialog där kunden känner sig förstådd och lösningen blir relevant. Samtalet bör börja med frågor och lyssnande, därefter sammanfattning av behov och först sedan presentation av lösning.</p>
+    <div class="pdf-link"><span class="label">Kopplat kursmaterial</span><br>Föreläsning 1-2: säljsamtal, kundbehov, erbjudande och argumentation.</div>
+    <div class="card-grid cols2"><article class="card card-color green"><div class="card-title">Checklista för säljsamtal</div><div class="card-text"><ul><li>Sätt syfte och agenda.</li><li>Ställ öppna frågor.</li><li>Lyssna aktivt och sammanfatta.</li><li>Presentera lösning efter behovsanalys.</li><li>Be om beslut eller nästa steg.</li></ul></div></article><article class="card card-color blue"><div class="card-title">Frågor</div><div class="card-text"><p><strong>Öppen:</strong> Vad vill ni förbättra?</p><p><strong>Följd:</strong> Vad leder det till idag?</p><p><strong>Sammanfattande:</strong> Har jag förstått rätt att snabbhet är viktigare än fler funktioner?</p></div></article></div>
+    <div class="casebox"><span class="label">Case med svarsmall</span><br>Kunden säger “vi behöver bättre rapporter”. Svarsmall: fråga vad de inte ser idag, vilka beslut som påverkas och vilken effekt bättre rapporter skulle ge.</div>
+  </section>
+
+  <section id="invandningar" class="section-anchor" aria-labelledby="invandningar-title">
+    <h2 id="invandningar-title" class="section-title"><span class="k-badge k2">K2</span> Argumentation och invändningar</h2>
+    <p class="lead">Argumentation ska översätta lösningens egenskaper till kundnytta. Invändningar ska förstås innan de bemöts. En invändning är ofta ett tecken på osäkerhet eller behov av mer information, inte bara ett nej.</p>
+    <div class="pdf-link"><span class="label">Kopplat kursmaterial</span><br>Föreläsning 2: FAB, erbjudande och kundnytta. Koppling till säljsamtal och förhandling.</div>
+    <div class="table-wrap"><table><thead><tr><th>Nivå</th><th>Exempel</th><th>Poäng</th></tr></thead><tbody><tr><td>Egenskap</td><td>Automatisk rapportering.</td><td>Vad lösningen har.</td></tr><tr><td>Fördel</td><td>Mindre manuellt arbete.</td><td>Vad egenskapen gör.</td></tr><tr><td>Kundnytta</td><td>Sparar tid och minskar fel i beslut.</td><td>Varför kunden bryr sig.</td></tr></tbody></table></div>
+    <div class="answerbox"><span class="label">Svarsmall invändning</span><br>Lyssna -> bekräfta -> fråga -> bemöt. Exempel: “Jag förstår att priset är viktigt. Vad jämför ni med? Om vi tittar på total kostnad över sex månader sparar lösningen tid i supporten.”</div>
+  </section>
+
+  <section id="forhandling" class="section-anchor" aria-labelledby="forhandling-title">
+    <h2 id="forhandling-title" class="section-title"><span class="k-badge k2">K2</span> Förhandlingsteknik</h2>
+    <p class="lead">Förhandling handlar om att nå en hållbar överenskommelse när parterna har gemensamt intresse men olika villkor. Förberedelse är centralt: säljaren behöver veta mål, smärtgräns, alternativ och vilka eftergifter som kan bytas mot motprestation.</p>
+    <div class="pdf-link"><span class="label">Kopplat kursmaterial</span><br>Kopplat till försäljning och affärsavslut i föreläsning 1-2 samt avtal i föreläsning 7.</div>
+    <div class="card-grid cols3"><article class="card card-color blue"><div class="card-title">BATNA</div><div class="card-text">Bästa alternativet om avtal inte nås.</div></article><article class="card card-color green"><div class="card-title">Målpris</div><div class="card-text">Det pris eller villkor du helst vill uppnå.</div></article><article class="card card-color red"><div class="card-title">Smärtgräns</div><div class="card-text">Lägsta acceptabla nivå innan du bör avstå.</div></article><article class="card card-color yellow"><div class="card-title">Eftergifter</div><div class="card-text">Ge inte utan motprestation.</div></article><article class="card card-color purple"><div class="card-title">Win-win</div><div class="card-text">Sök lösning där båda får centrala intressen uppfyllda.</div></article><article class="card card-color gray"><div class="card-title">Intressen</div><div class="card-text">Fråga varför kunden kräver ett visst villkor.</div></article></div>
+    <div class="casebox"><span class="label">Case med svarsmall</span><br>Kunden kräver 15 procent rabatt. Svarsmall: ta reda på intresset bakom kravet, erbjud mindre rabatt mot längre avtal eller större volym och kontrollera att marginalen håller.</div>
+  </section>
+
+  <section id="ekonomi" class="section-anchor" aria-labelledby="ekonomi-title">
+    <h2 id="ekonomi-title" class="section-title"><span class="k-badge k3">K3</span> Företagsekonomiska grunder</h2>
+    <p class="lead">Ekonomin visar om affären är hållbar. Hög omsättning räcker inte om kostnader, likviditet eller marginal är fel. I affärsmannaskap används ekonomiska begrepp för att förstå pris, lönsamhet, betalningsförmåga och konsekvensen av rabatt.</p>
+    <div class="pdf-link"><span class="label">Kopplat kursmaterial</span><br>Föreläsning 5-6: budget, kostnader, sociala avgifter, försäkringar och lönsamhet.</div>
+    <div class="card-grid cols4"><article class="card card-color green"><div class="card-title">Intäkter</div><div class="card-text">Pengar från försäljning av varor eller tjänster. Intäkt bokförs när affären tjänas in, inte alltid när pengarna betalas.</div></article><article class="card card-color red"><div class="card-title">Kostnader</div><div class="card-text">Resurser som förbrukas, till exempel lön, material, licenser, hyra och marknadsföring.</div></article><article class="card card-color blue"><div class="card-title">Budget</div><div class="card-text">Plan för framtida intäkter och kostnader. Budget används för styrning och uppföljning.</div></article><article class="card card-color yellow"><div class="card-title">Likviditet</div><div class="card-text">Förmåga att betala i tid. Ett företag kan vara lönsamt men ändå ha likviditetsproblem.</div></article><article class="card card-color purple"><div class="card-title">Resultat</div><div class="card-text">Intäkter minus kostnader. Positivt resultat är vinst, negativt resultat är förlust.</div></article><article class="card card-color green"><div class="card-title">Marginal</div><div class="card-text">Andel av priset som blir kvar efter kostnad. Används för att bedöma lönsamhet.</div></article><article class="card card-color blue"><div class="card-title">Pålägg</div><div class="card-text">Hur mycket kostnaden höjs för att få försäljningspris. Vanligt vid prissättning.</div></article><article class="card card-color yellow"><div class="card-title">Täckningsbidrag</div><div class="card-text">Bidrag till fasta kostnader och vinst. Viktigt när man bedömer en enskild affär.</div></article></div>
+    <div class="formula">Resultat = intäkter - kostnader</div><div class="formula">Marginal = (pris - kostnad) / pris</div><div class="formula">Pålägg = (pris - inköpskostnad) / inköpskostnad</div>
+    <div class="casebox"><span class="label">Case med svarsmall</span><br>Ni ska anställa en konsult. Svarsmall: räkna med lön, sociala avgifter, pension/försäkring, dator, programlicenser, utbildning, administration och tid utan debitering.</div>
+  </section>
+
+  <section id="kalkyler" class="section-anchor" aria-labelledby="kalkyler-title">
+    <h2 id="kalkyler-title" class="section-title"><span class="k-badge k3">K3</span> Kalkyler, marginal och prissättning</h2>
+    <p class="lead">Kalkyler hjälper dig sätta pris, bedöma rabatt och avgöra om affären är lönsam. De visar hur intäkter och kostnader påverkar resultatet, och gör det lättare att motivera affärsbeslut med siffror.</p>
+    <div class="pdf-link"><span class="label">Kopplat kursmaterial</span><br>Föreläsning 5-6: kostnader, lönsamhet, budget och kalkyler.</div>
+    <div class="card-grid cols2"><article class="card"><div class="card-title">Täckningsbidrag</div><div class="card-text"><span class="formula">TB = särintäkt - särkostnad</span>Pris 10 000 kr - rörlig kostnad 6 000 kr = TB 4 000 kr. Täckningsbidraget visar hur mycket affären bidrar till fasta kostnader och vinst.</div></article><article class="card"><div class="card-title">Nollpunkt</div><div class="card-text"><span class="formula">Nollpunkt = fasta kostnader / TB per enhet</span>80 000 / 4 000 = 20 sålda uppdrag. Efter nollpunkten börjar varje ytterligare uppdrag bidra till vinst.</div></article><article class="card"><div class="card-title">Rabatteffekt</div><div class="card-text">10 procent rabatt ger pris 9 000 kr. TB blir 3 000 kr och nollpunkten stiger till cirka 27 uppdrag. Därför kan en liten rabatt kräva mycket högre volym.</div></article><article class="card"><div class="card-title">Värdebaserat pris</div><div class="card-text">Priset motiveras av kundnytta, inte bara av kostnaden. Det kräver att säljaren kan visa vilken effekt lösningen skapar för kunden.</div></article></div>
+    <div class="exam"><span class="label">Så skriver du på tenta</span><br>Visa formeln, sätt in enkla siffror och förklara vad resultatet betyder för affärsbeslutet.</div>
+  </section>
+
+  <section id="budget" class="section-anchor" aria-labelledby="budget-title">
+    <h2 id="budget-title" class="section-title"><span class="k-badge k3">K3</span> Budget, likviditet och nyckeltal</h2>
+    <p class="lead">Budget och nyckeltal används för att styra verksamheten och upptäcka ekonomiska risker. En budget är en plan, medan nyckeltal används för att följa upp om företaget utvecklas som planerat.</p>
+    <div class="pdf-link"><span class="label">Kopplat kursmaterial</span><br>Föreläsning 5-6: budget, kostnader, sociala avgifter, försäkringar, lönsamhet och nyckeltal.</div>
+    <div class="table-wrap"><table><thead><tr><th>Begrepp</th><th>Beskrivning</th><th>Tentakoppling</th></tr></thead><tbody><tr><td>Resultatbudget</td><td>Plan för intäkter, kostnader och resultat.</td><td>Visar om verksamheten väntas gå med vinst.</td></tr><tr><td>Likviditetsbudget</td><td>Plan för inbetalningar och utbetalningar.</td><td>Visar om företaget kan betala i tid.</td></tr><tr><td>Vinstmarginal</td><td>Vinst i relation till omsättning.</td><td>Visar hur mycket försäljningen ger i vinst.</td></tr><tr><td>Kassalikviditet</td><td>Kortsiktig betalningsförmåga.</td><td>Viktigt när kunder betalar sent.</td></tr></tbody></table></div>
+    <div class="casebox"><span class="label">Case med svarsmall</span><br>Ett företag är lönsamt men saknar pengar på kontot. Svarsmall: skilj på resultat och likviditet; vinsten kan finnas i obetalda kundfakturor eller bundet lager.</div>
+  </section>
+
+  <section id="juridik" class="section-anchor" aria-labelledby="juridik-title">
+    <h2 id="juridik-title" class="section-title"><span class="k-badge k3">K3</span> Avtalsrätt och affärsjuridik</h2>
+    <p class="lead">Juridiken gör affären tydlig och minskar risken för missförstånd, tvister och fel ansvar. Avtalsrätt är viktig i affärsmannaskap eftersom den visar när parterna blir bundna och vilka skyldigheter de har.</p>
+    <div class="pdf-link"><span class="label">Kopplat kursmaterial</span><br>Föreläsning 7: offentlig upphandling och avtal.</div>
+    <div class="card-grid cols3"><article class="card card-color blue"><div class="card-title">Anbud</div><div class="card-text">Ett erbjudande med tydliga villkor, till exempel pris, omfattning och leveranstid. Ett anbud kan vara bindande under acceptfristen.</div></article><article class="card card-color green"><div class="card-title">Accept</div><div class="card-text">Ett ja som stämmer med anbudet. Om kunden ändrar villkor är det ofta en oren accept, vilket kan räknas som ett nytt anbud.</div></article><article class="card card-color yellow"><div class="card-title">Avtal</div><div class="card-text">Uppstår när anbud och accept stämmer överens. Skriftliga avtal minskar risk eftersom pris, ansvar, leverans och villkor blir lättare att bevisa.</div></article><article class="card card-color red"><div class="card-title">Avtalsbrott</div><div class="card-text">När en part inte uppfyller sina skyldigheter, till exempel sen leverans, utebliven betalning eller fel i tjänsten.</div></article><article class="card card-color purple"><div class="card-title">Sekretess/NDA</div><div class="card-text">Skyddar känslig information mellan parter, till exempel affärsidéer, kunddata eller tekniska lösningar.</div></article><article class="card card-color gray"><div class="card-title">Offentlig handling</div><div class="card-text">Dokument hos myndighet kan vara offentliga om de inte omfattas av sekretess. Det är viktigt vid offentlig upphandling.</div></article></div>
+    <div class="casebox"><span class="label">Case med svarsmall</span><br>Kunden accepterar priset men ändrar leveranstiden. Svarsmall: förklara att ändrad accept kan vara nytt anbud och att parterna behöver bekräfta villkoren.</div>
+  </section>
+
+  <section id="upphandling" class="section-anchor" aria-labelledby="upphandling-title">
+    <h2 id="upphandling-title" class="section-title"><span class="k-badge k3">K3</span> Offentlig upphandling</h2>
+    <p class="lead">Offentlig upphandling är processen där offentlig sektor köper varor eller tjänster enligt regler om transparens, likabehandling och konkurrens. Leverantören måste följa skallkrav, tidsfrister och utvärderingskriterier noggrant.</p>
+    <div class="pdf-link"><span class="label">Kopplat kursmaterial</span><br>Föreläsning 7: offentlig upphandling och avtal.</div>
+    <div class="process-line" aria-label="Process för offentlig upphandling"><span>Förberedelser</span><span>Upphandlingsdokument</span><span>Annonsering</span><span>Anbudstid</span><span>Utvärdering</span><span>Avtal</span></div>
+    <div class="describe"><span class="label">Beskriv så här</span><br>Upphandling börjar med att myndigheten definierar behov och krav. Därefter publiceras upphandlingsdokument, leverantörer lämnar anbud, anbuden utvärderas enligt kriterierna och avtal tecknas med vinnande leverantör.</div>
+    <div class="casebox"><span class="label">Case med svarsmall</span><br>Ni ska lämna anbud på IT-support till en kommun. Svarsmall: kontrollera skallkrav, utvärderingskriterier, sekretess, tidsfrister och vilka bevis som måste bifogas.</div>
+  </section>
+
+  <section id="case" class="section-anchor" aria-labelledby="case-title">
+    <h2 id="case-title" class="section-title">Integrerade case</h2>
+    <p class="lead">De här casen tränar flera kriterier samtidigt.</p>
+    <div class="pdf-link"><span class="label">Kopplat kursmaterial</span><br>Integrerar Affärsmannaskap 1-9: kundbehov, erbjudande, SWOT/PESTLIED, ekonomi, avtal, upphandling och scenarioplanering.</div>
+    <div class="casebox"><span class="label">Case 1: IT-konsultbolag</span><br>Kunden tycker priset är högt. Svarsmall: behovsanalys -> FAB -> värdeargument -> marginalkontroll -> förhandling med motprestation.</div>
+    <div class="casebox"><span class="label">Case 2: Ny affärsidé</span><br>Ni startar konsultbolag. Svarsmall: affärsidé -> målgrupp -> SWOT -> PESTLIED -> budget -> företagsform.</div>
+    <div class="casebox"><span class="label">Case 3: Anställd konsult</span><br>Ni räknar på kostnad. Svarsmall: lön -> sociala avgifter -> försäkringar -> utrustning -> debiteringsgrad -> pris och täckningsbidrag.</div>
+    <div class="casebox"><span class="label">Case 4: Offentlig kund</span><br>Ni svarar på upphandling. Svarsmall: läs krav, matcha anbud, kontrollera sekretess/offentlig handling och säkra avtalets villkor.</div>
+    <div class="casebox"><span class="label">Case 5: Scenario</span><br>AI förändrar konsultmarknaden. Svarsmall: använd PESTLIED, identifiera hot/möjligheter och justera erbjudande och kompetens.</div>
+  </section>
+
+  <section id="svarsmallar" class="section-anchor" aria-labelledby="svarsmallar-title">
+    <h2 id="svarsmallar-title" class="section-title">Tentafrågor och svarsmallar</h2>
+    <p class="lead">Använd samma struktur på breda “Beskriv...”-frågor.</p>
+    <div class="pdf-link"><span class="label">Kopplat kursmaterial</span><br>Sammanfattar svarsteknik för alla föreläsningsområden och knyter dem till K1, K2 och K3.</div>
+    <div class="card-grid cols2"><article class="card card-color green"><div class="card-title">Beskriv kundbehov</div><div class="card-text">Definiera behov, beskriv behovsanalys, ge exempel och koppla till kundnytta.</div></article><article class="card card-color blue"><div class="card-title">Beskriv försäljningsprocessen</div><div class="card-text">Lista stegen, förklara syftet med varje steg och visa vad som händer om ett steg hoppas över.</div></article><article class="card card-color yellow"><div class="card-title">Beskriv kalkyler</div><div class="card-text">Förklara TB, marginal, pålägg eller nollpunkt med enkel beräkning.</div></article><article class="card card-color purple"><div class="card-title">Beskriv avtalsrätt</div><div class="card-text">Förklara anbud, accept, avtal, avtalsbrott och varför tydliga villkor minskar risk.</div></article></div>
+  </section>
+
+  <section id="sista-repetition" class="section-anchor" aria-labelledby="sista-title">
+    <h2 id="sista-title" class="section-title">Sista repetitionen före tenta</h2>
+    <p class="lead">Snabb repetition med begrepp, tentafrågor, mini-case och checklista.</p>
+    <div class="pdf-link"><span class="label">Kopplat kursmaterial</span><br>Repetition av Affärsmannaskap 1-9 med fokus på kriterierna och typiska tentafrågor.</div>
+    <h3 class="sub-title">20 snabba begrepp</h3>
+    <div class="card-grid cols2">
+      <details class="flashcard"><summary>Kundbehov</summary><p>Det kunden behöver för att lösa ett problem eller nå ett mål. Kan vara uttalat, underliggande eller latent.</p></details><details class="flashcard"><summary>Kundnytta</summary><p>Den konkreta effekt kunden får av lösningen, till exempel sparad tid, lägre risk eller bättre kvalitet.</p></details><details class="flashcard"><summary>FAB</summary><p>Feature, Advantage och Benefit. Används för att gå från egenskap till kundnytta.</p></details><details class="flashcard"><summary>5P</summary><p>Produkt, pris, plats, påverkan och personal/process. Beskriver erbjudandets marknadsmix.</p></details><details class="flashcard"><summary>Differentiering</summary><p>Hur företaget skiljer sig från konkurrenter genom exempelvis kvalitet, service, pris eller specialistkunskap.</p></details><details class="flashcard"><summary>SWOT</summary><p>Styrkor, svagheter, möjligheter och hot. Interna faktorer är styrkor/svagheter; externa är möjligheter/hot.</p></details><details class="flashcard"><summary>PESTLIED</summary><p>Omvärldsanalys med politiska, ekonomiska, sociala, tekniska, legala, internationella, ekologiska och demografiska faktorer.</p></details><details class="flashcard"><summary>Affärsidé</summary><p>Beskriver vad företaget gör, för vem, hur det görs och varför kunden ska välja erbjudandet.</p></details><details class="flashcard"><summary>Prospektering</summary><p>Att hitta och bedöma möjliga kunder utifrån behov, betalningsförmåga och beslutsmöjlighet.</p></details><details class="flashcard"><summary>Invändning</summary><p>Kundens tveksamhet, till exempel pris, risk eller timing. Ska förstås innan den bemöts.</p></details><details class="flashcard"><summary>BATNA</summary><p>Bästa alternativet om avtal inte nås. Hjälper säljaren veta när den bör acceptera eller avstå.</p></details><details class="flashcard"><summary>Win-win</summary><p>Överenskommelse där båda parter får viktiga intressen uppfyllda och relationen kan fortsätta.</p></details><details class="flashcard"><summary>Intäkt</summary><p>Värde av försäljning. Skilj från inbetalning, som handlar om när pengar kommer in.</p></details><details class="flashcard"><summary>Kostnad</summary><p>Värde av resurser som förbrukas, till exempel lön, material, licenser och hyra.</p></details><details class="flashcard"><summary>Täckningsbidrag</summary><p>Särintäkt minus särkostnad. Visar bidrag till fasta kostnader och vinst.</p></details><details class="flashcard"><summary>Marginal</summary><p>Andel av priset som återstår efter kostnad. Används för att bedöma lönsamhet.</p></details><details class="flashcard"><summary>Likviditet</summary><p>Förmåga att betala på kort sikt. Ett företag kan vara lönsamt men ändå ha svag likviditet.</p></details><details class="flashcard"><summary>Anbud</summary><p>Erbjudande med tydliga villkor. Kan vara bindande under den tid mottagaren får acceptera.</p></details><details class="flashcard"><summary>Accept</summary><p>Ja till anbudets villkor. Ändrad accept kan räknas som nytt anbud.</p></details><details class="flashcard"><summary>Upphandling</summary><p>Reglerad inköpsprocess i offentlig sektor där krav, anbudstid, utvärdering och avtal styrs tydligt.</p></details>
+    </div>
+    <h3 class="sub-title">10 vanliga tentafrågor</h3>
+    <ol><li>Beskriv hur man tar reda på kundbehov.</li><li>Beskriv FAB och ge exempel.</li><li>Beskriv hur långsiktiga kundrelationer skapas.</li><li>Beskriv försäljningsprocessen.</li><li>Beskriv ett lyckat säljsamtal.</li><li>Beskriv hur invändningar hanteras.</li><li>Beskriv BATNA och smärtgräns i förhandling.</li><li>Beskriv skillnaden mellan resultat och likviditet.</li><li>Beskriv täckningsbidrag och nollpunkt.</li><li>Beskriv hur avtal uppstår genom anbud och accept.</li></ol>
+    <h3 class="sub-title">5 mini-case</h3>
+    <div class="card-grid cols2"><article class="casebox"><span class="label">Mini-case K1</span><br>Kunden säger att lösningen är dyr. Svar: fråga vad priset jämförs med, använd FAB och visa kundnyttan i tid, risk eller kvalitet.</article><article class="casebox"><span class="label">Mini-case K1</span><br>Ni väljer målgrupp för ett IT-bolag. Svar: segmentera marknaden, välj målgrupp och motivera differentiering.</article><article class="casebox"><span class="label">Mini-case K2</span><br>Kunden vill ha offert utan möte. Svar: gör kort behovsanalys först och koppla offerten till beslutskriterier.</article><article class="casebox"><span class="label">Mini-case K3</span><br>Rabatt sänker täckningsbidraget. Svar: räkna ny marginal och förhandla rabatt mot motprestation.</article><article class="casebox"><span class="label">Mini-case K3</span><br>Kommunen gör upphandling. Svar: kontrollera skallkrav, anbudstid, utvärdering, offentlig handling och avtalsvillkor.</article></div>
+    <h3 class="sub-title">Checklista: kan jag förklara detta med egna ord?</h3>
+    <ul class="two-col-list"><li>Kundbehov och kundnytta</li><li>FAB och 5P</li><li>SWOT och PESTLIED</li><li>Försäljningsprocessens 8 steg</li><li>Säljsamtalets struktur</li><li>Invändningar och argument</li><li>BATNA, målpris och smärtgräns</li><li>Intäkt, kostnad och resultat</li><li>Budget, likviditet och nyckeltal</li><li>Anbud, accept, avtal och upphandling</li></ul>
+  </section>
+</main>
+
+<script>
+function setCriteriaButton(open){
+  const button = document.getElementById('kriterier-btn');
+  button.style.background = open ? '#1e1e1b' : 'none';
+  button.style.color = open ? '#fff' : 'var(--muted)';
+  button.style.borderColor = open ? '#1e1e1b' : '#cfcac0';
+  button.setAttribute('aria-expanded', String(open));
+}
+function toggleKriterier(){
+  const popup = document.getElementById('kriterier-popup');
+  const open = popup.style.display === 'none' || popup.style.display === '';
+  popup.style.display = open ? 'block' : 'none';
+  setCriteriaButton(open);
+}
+function closeKriterier(){
+  const popup = document.getElementById('kriterier-popup');
+  popup.style.display = 'none';
+  setCriteriaButton(false);
+}
+const allLinks = document.querySelectorAll('.toc-link');
+const allSections = document.querySelectorAll('.section-anchor');
+const menuToggle = document.getElementById('menu-toggle');
+function showSection(id) {
+  allSections.forEach(section => section.classList.toggle('active-section', section.id === id));
+  allLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + id));
+  closeKriterier();
+  document.body.classList.remove('nav-open');
+  if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
+  window.scrollTo(0, 0);
+}
+allLinks.forEach(link => {
+  link.addEventListener('click', event => {
+    event.preventDefault();
+    showSection(link.getAttribute('href').slice(1));
+  });
+});
+if (allLinks.length) allLinks[0].classList.add('active');
+if (menuToggle) {
+  menuToggle.addEventListener('click', () => {
+    const open = !document.body.classList.contains('nav-open');
+    document.body.classList.toggle('nav-open', open);
+    menuToggle.setAttribute('aria-expanded', String(open));
+  });
+}
+document.addEventListener('click', event => {
+  const wrap = document.getElementById('criteria-wrap');
+  const sidebar = document.getElementById('sidebar');
+  if (wrap && !wrap.contains(event.target)) closeKriterier();
+  if (document.body.classList.contains('nav-open') && sidebar && menuToggle && !sidebar.contains(event.target) && !menuToggle.contains(event.target)) {
+    document.body.classList.remove('nav-open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+  }
+});
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape') {
+    closeKriterier();
+    document.body.classList.remove('nav-open');
+    if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
+    return;
+  }
+  if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+  event.preventDefault();
+  const popup = document.getElementById('kriterier-popup');
+  if (popup.style.display !== 'none' && popup.style.display !== '') {
+    closeKriterier();
+    return;
+  }
+  const links = Array.from(allLinks);
+  const current = links.findIndex(link => link.classList.contains('active'));
+  if (current === -1) return;
+  const next = event.key === 'ArrowRight' ? Math.min(current + 1, links.length - 1) : Math.max(current - 1, 0);
+  if (next !== current) showSection(links[next].getAttribute('href').slice(1));
+});
+</script>
+</body>
+</html>
