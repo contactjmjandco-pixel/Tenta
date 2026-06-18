@@ -37,6 +37,8 @@ a{color:inherit}
 #sidebar-header{padding:.9rem 1rem .8rem;border-bottom:1px solid var(--border)}
 #sidebar-header h2{font-family:'DM Serif Display',Georgia,serif;font-size:18px;font-weight:400;margin:0 0 .2rem}
 #sidebar-header p{margin:.1rem 0 .65rem;font-size:11px;color:var(--hint);letter-spacing:.03em}
+#sidebar-header{display:flex;flex-wrap:wrap;align-items:center;gap:.35rem}
+#sidebar-header h2,#sidebar-header p{flex:0 0 100%}
 #toc{padding:.75rem 0 1.5rem}
 .toc-group{padding:.78rem 1rem .35rem;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--hint);font-weight:700}
 .toc-link{display:flex;align-items:center;gap:.45rem;padding:.48rem 1rem .48rem 1.1rem;color:var(--muted);text-decoration:none;border-left:3px solid transparent;font-size:13px;line-height:1.25}
@@ -118,6 +120,8 @@ details.flashcard p{color:var(--muted);font-size:13px;margin:.55rem 0 0}
 .header-link:hover,.header-link:focus{border-color:var(--accent);color:var(--accent);outline:2px solid transparent}
 .quiz-link{background:#6f4aa8;border-color:#6f4aa8;color:#fff;font-size:12px;font-weight:700;padding:6px 14px}
 .quiz-link:hover,.quiz-link:focus{background:#5d3d8f;border-color:#5d3d8f;color:#fff}
+.study-link{background:var(--k2);border-color:var(--k2);color:#fff;font-size:12px;font-weight:700;padding:6px 14px}
+.study-link:hover,.study-link:focus{background:#0e5e84;border-color:#0e5e84;color:#fff}
 #kriterier-popup{display:none;position:fixed;left:16px;top:88px;width:300px;max-width:calc(100vw - 32px);background:#fff;border:1.5px solid var(--accent);border-radius:10px;padding:.8rem .85rem;box-shadow:0 8px 24px rgba(31,111,91,.16);z-index:260;font-size:11.5px;line-height:1.45;color:#333}
 #kriterier-popup strong{display:block;margin-bottom:.45rem;color:var(--text)}
 #kriterier-popup ol{margin:.25rem 0 0 1.15rem;padding:0}
@@ -125,7 +129,7 @@ details.flashcard p{color:var(--muted);font-size:13px;margin:.55rem 0 0}
   .mobile-topbar{display:flex}
   #sidebar{transform:translateX(-105%);transition:transform .2s ease;width:min(96vw,390px);box-shadow:8px 0 22px rgba(0,0,0,.08)}
   body.nav-open #sidebar{transform:translateX(0)}
-  #criteria-wrap{display:block}
+  #criteria-wrap{display:inline-block}
   #kriterier-popup{position:absolute;left:0;top:calc(100% + 8px);width:min(340px, calc(100vw - 32px));max-height:calc(100vh - 130px);overflow:auto}
   main{margin-left:0;padding:1.25rem 1rem 3rem}
   .section-title{font-size:30px}
@@ -161,6 +165,7 @@ details.flashcard p{color:var(--muted);font-size:13px;margin:.55rem 0 0}
       </div>
     </div>
     <a class="header-link quiz-link" href="quiz.html">Quiz</a>
+    <a class="header-link study-link" href="#instudering" data-section-link="instudering">Instudering</a>
   </div>
   <div id="toc">
     <div class="toc-group">Start och kriterier</div>
@@ -924,6 +929,12 @@ allLinks.forEach(link => {
   link.addEventListener('click', event => {
     event.preventDefault();
     showSection(link.getAttribute('href').slice(1));
+  });
+});
+document.querySelectorAll('[data-section-link]').forEach(link => {
+  link.addEventListener('click', event => {
+    event.preventDefault();
+    showSection(link.dataset.sectionLink);
   });
 });
 function getInitialSectionId() {
