@@ -34,10 +34,10 @@ a{color:inherit}
 .mobile-topbar strong{font-family:'DM Serif Display',Georgia,serif;font-size:18px;font-weight:400}
 #menu-toggle{border:1px solid var(--border);background:#fff;border-radius:8px;padding:.4rem .65rem;cursor:pointer;color:var(--text)}
 #sidebar{position:fixed;left:0;top:0;width:300px;height:100vh;background:var(--paper);border-right:1px solid var(--border);overflow-y:auto;z-index:200}
-#sidebar-header{padding:.9rem 1rem .8rem;border-bottom:1px solid var(--border)}
+#sidebar-header{padding:.9rem 1rem 1rem;border-bottom:1px solid var(--border)}
 #sidebar-header h2{font-family:'DM Serif Display',Georgia,serif;font-size:18px;font-weight:400;margin:0 0 .2rem}
 #sidebar-header p{margin:.1rem 0 .65rem;font-size:11px;color:var(--hint);letter-spacing:.03em}
-#sidebar-header{display:flex;flex-wrap:wrap;align-items:center;gap:.35rem}
+#sidebar-header{display:flex;flex-wrap:wrap;align-items:center;gap:.45rem;row-gap:.55rem}
 #sidebar-header h2,#sidebar-header p{flex:0 0 100%}
 #toc{padding:.75rem 0 1.5rem}
 .toc-group{padding:.78rem 1rem .35rem;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--hint);font-weight:700}
@@ -129,6 +129,7 @@ details.flashcard p{color:var(--muted);font-size:13px;margin:.55rem 0 0}
   .mobile-topbar{display:flex}
   #sidebar{transform:translateX(-105%);transition:transform .2s ease;width:min(96vw,390px);box-shadow:8px 0 22px rgba(0,0,0,.08)}
   body.nav-open #sidebar{transform:translateX(0)}
+  #sidebar-header{padding-bottom:1.25rem}
   #criteria-wrap{display:inline-block}
   #kriterier-popup{position:absolute;left:0;top:calc(100% + 8px);width:min(340px, calc(100vw - 32px));max-height:calc(100vh - 130px);overflow:auto}
   main{margin-left:0;padding:1.25rem 1rem 3rem}
