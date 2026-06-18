@@ -44,7 +44,7 @@ a{color:inherit}
 .toc-link.active{color:var(--accent);background:var(--accent-soft);border-left-color:var(--accent);font-weight:700}
 main{margin-left:300px;max-width:1180px;padding:2.2rem 2.5rem 4rem}
 .section-anchor{display:none;scroll-margin-top:2rem;margin-bottom:2.7rem}
-.section-anchor.active-section{display:block}
+.section-anchor.active-section{display:flex;flex-direction:column}
 .section-title{font-family:'DM Serif Display',Georgia,serif;font-size:36px;font-weight:400;line-height:1.05;margin:0 0 .75rem}
 .lead{font-size:16px;color:var(--muted);max-width:850px;margin:0 0 1.35rem}
 .sub-title{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--hint);margin:1.7rem 0 .75rem}
@@ -76,10 +76,15 @@ main{margin-left:300px;max-width:1180px;padding:2.2rem 2.5rem 4rem}
 .exam .label{background:#dff1ea;color:#1f6f5b;border:1px solid #b8ded1;border-radius:999px;padding:.22rem .5rem;margin-bottom:.5rem}
 .casebox{border:1px solid #d4d8df;background:#f7f9fb;color:#33404d}
 .casebox .label{background:#e7f0fb;color:#24527a;border:1px solid #bed3e8;border-radius:999px;padding:.22rem .5rem;margin-bottom:.5rem}
+#instudering .card{border:1px solid #d4d8df;background:#f7f9fb;color:#33404d}
+#instudering .card-title{display:inline-block;background:#e7f0fb;color:#24527a;border:1px solid #bed3e8;border-radius:999px;padding:.22rem .5rem;margin-bottom:.55rem;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;line-height:1.35}
+#instudering .card-text{color:#33404d}
+#instudering .card-text p{margin:.2rem 0 0}
 .describe{border:1px solid #c9d6e2;background:#f6faff;color:#2f4050}
 .describe .label{background:#e7eef6;color:#2f5878;border:1px solid #bfd0df;border-radius:999px;padding:.22rem .5rem;margin-bottom:.5rem}
 .pdf-link{border:1px dashed #c8c1b2;background:#fffdf5;color:#504a3c;font-size:13px}
 .pdf-link .label{background:#dff1ea;color:#1f6f5b;border:1px solid #b8ded1;border-radius:999px;padding:.22rem .5rem;margin-bottom:.5rem}
+.section-anchor>.pdf-link{order:99}
 .answerbox{border:1px solid #d9cfe7;background:#fbf8ff;color:#3f3550}
 .answerbox .label{background:#efe6fb;color:#68439a;border:1px solid #d7c1ef;border-radius:999px;padding:.22rem .5rem;margin-bottom:.5rem}
 .label{display:inline-block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--hint);margin-bottom:.35rem}
@@ -182,6 +187,8 @@ details.flashcard p{color:var(--muted);font-size:13px;margin:.55rem 0 0}
     <a class="toc-link" href="#case"><span class="toc-badge mix">ALL</span>Integrerade case</a>
     <a class="toc-link" href="#svarsmallar"><span class="toc-badge mix">ALL</span>Tentafrågor och svarsmallar</a>
     <a class="toc-link" href="#sista-repetition"><span class="toc-badge mix">ALL</span>Sista repetitionen</a>
+    <div class="toc-group">Instudering</div>
+    <a class="toc-link" href="#instudering"><span class="toc-badge mix">ALL</span>Instuderingsfrågor och svar</a>
     <a class="toc-link" href="#whats-new"><span class="toc-badge alert">?</span>What's New?</a>
   </div>
 </nav>
@@ -190,7 +197,7 @@ details.flashcard p{color:var(--muted);font-size:13px;margin:.55rem 0 0}
   <section id="oversikt" class="section-anchor active-section" aria-labelledby="oversikt-title">
     <h1 id="oversikt-title" class="section-title">Översikt och kriteriekarta</h1>
     <p class="lead">Manualen är byggd som ett studieverktyg. Varje del är kopplad till kunskapskriterierna, kursmaterialets föreläsningsområden och typiska “Beskriv...”-frågor.</p>
-    <div class="pdf-link"><span class="label">Kopplat kursmaterial</span><br>Samlar huvudområden från Affärsmannaskap 1-10 och kunskapskriterierna: kund, försäljning, ekonomi och juridik.</div>
+    <div class="pdf-link"><span class="label">Kopplat kursmaterial</span><br>Samlar huvudområden från Affärsmannaskap 1-12 och kunskapskriterierna: kund, försäljning, ekonomi och juridik.</div>
     <div class="criteria-map" aria-label="Kriteriekarta">
       <article class="criteria-card"><span class="k-badge k1">K1</span><h3>Kundbehov och relation</h3><p>Kundbehov, kundvärde, FAB, 5P, differentiering och långsiktiga kundrelationer.</p><div class="pill-row"><span class="pill">Kundbehov</span><span class="pill">FAB</span><span class="pill">5P</span><span class="pill">Relation</span></div></article>
       <article class="criteria-card"><span class="k-badge k2">K2</span><h3>Försäljning och förhandling</h3><p>Försäljningsprocess, säljsamtal, frågeteknik, invändningar och förhandlingsteknik.</p><div class="pill-row"><span class="pill">Säljsamtal</span><span class="pill">Frågor</span><span class="pill">BATNA</span><span class="pill">Avslut</span></div></article>
@@ -202,7 +209,7 @@ details.flashcard p{color:var(--muted);font-size:13px;margin:.55rem 0 0}
   <section id="karna" class="section-anchor" aria-labelledby="karna-title">
     <h2 id="karna-title" class="section-title">Affärsmannaskapets kärna</h2>
     <p class="lead">Affärsmannaskap är förmågan att skapa affärer som är värdefulla för kunden och hållbara för företaget.</p>
-    <div class="pdf-link"><span class="label">Kopplat kursmaterial</span><br>Bygger på helheten i Affärsmannaskap 1-10: kundförståelse, erbjudande, försäljning, ekonomi, juridik och scenariotänkande.</div>
+    <div class="pdf-link"><span class="label">Kopplat kursmaterial</span><br>Bygger på helheten i Affärsmannaskap 1-12: kundförståelse, erbjudande, försäljning, ekonomi, juridik och scenariotänkande.</div>
     <div class="describe"><span class="label">Beskriv så här</span><br>Affärsmannaskap innebär att kombinera kundförståelse med affärsansvar. Säljaren behöver förstå kundens problem, formulera ett relevant värdeerbjudande, genomföra en professionell försäljning och kontrollera att affären är ekonomiskt och juridiskt hållbar. På tenta är det viktigt att visa balansen mellan kundens nytta och företagets lönsamhet. En affär är inte stark bara för att kunden säger ja, utan också för att leverans, pris, ansvar och risk är rimliga.</div>
     <div class="card-grid cols3"><article class="card card-color green"><div class="card-title">Kundvärde</div><div class="card-text">Vad kunden får ut av affären: effekt, nytta, trygghet, sparad tid eller minskad risk.</div></article><article class="card card-color blue"><div class="card-title">Säljförmåga</div><div class="card-text">Hur säljaren leder kunden genom frågor, argument, invändningar, förhandling och avslut.</div></article><article class="card card-color yellow"><div class="card-title">Affärsansvar</div><div class="card-text">Att räkna på lönsamhet, förstå risker och säkra tydliga villkor i avtal.</div></article></div>
     <div class="note"><span class="label">Kompletterande tentapoäng</span><br>En bra affär kan beskrivas som en balans mellan värde, förtroende och kontroll. Värde handlar om kundens effekt, förtroende handlar om relation och professionalitet, och kontroll handlar om ekonomi, leveransförmåga och juridiska villkor.</div>
@@ -395,7 +402,7 @@ details.flashcard p{color:var(--muted);font-size:13px;margin:.55rem 0 0}
   <section id="case" class="section-anchor" aria-labelledby="case-title">
     <h2 id="case-title" class="section-title">Integrerade case</h2>
     <p class="lead">De här casen tränar flera kriterier samtidigt.</p>
-    <div class="pdf-link"><span class="label">Kopplat kursmaterial</span><br>Integrerar Affärsmannaskap 1-10: kundbehov, erbjudande, SWOT/PESTLIED, ekonomi, avtal, upphandling och scenarioplanering.</div>
+    <div class="pdf-link"><span class="label">Kopplat kursmaterial</span><br>Integrerar Affärsmannaskap 1-12: kundbehov, erbjudande, SWOT/PESTLIED, ekonomi, avtal, upphandling och scenarioplanering.</div>
     <div class="casebox"><span class="label">Case 1: IT-konsultbolag</span><br>Kunden tycker priset är högt. Svarsmall: behovsanalys -> FAB -> värdeargument -> marginalkontroll -> förhandling med motprestation.</div>
     <div class="casebox"><span class="label">Case 2: Ny affärsidé</span><br>Ni startar konsultbolag. Svarsmall: affärsidé -> målgrupp -> SWOT -> PESTLIED -> budget -> företagsform.</div>
     <div class="casebox"><span class="label">Case 3: Anställd konsult</span><br>Ni räknar på kostnad. Svarsmall: lön -> sociala avgifter -> försäkringar -> utrustning -> debiteringsgrad -> pris och täckningsbidrag.</div>
@@ -406,14 +413,14 @@ details.flashcard p{color:var(--muted);font-size:13px;margin:.55rem 0 0}
   <section id="svarsmallar" class="section-anchor" aria-labelledby="svarsmallar-title">
     <h2 id="svarsmallar-title" class="section-title">Tentafrågor och svarsmallar</h2>
     <p class="lead">Använd samma struktur på breda “Beskriv...”-frågor.</p>
-    <div class="pdf-link"><span class="label">Kopplat kursmaterial</span><br>Sammanfattar svarsteknik för Affärsmannaskap 1-10 och knyter dem till K1, K2 och K3.</div>
+    <div class="pdf-link"><span class="label">Kopplat kursmaterial</span><br>Sammanfattar svarsteknik för Affärsmannaskap 1-12 och knyter dem till K1, K2 och K3.</div>
     <div class="card-grid cols2"><article class="card card-color green"><div class="card-title">Beskriv kundbehov</div><div class="card-text">Definiera behov, beskriv behovsanalys, ge exempel och koppla till kundnytta.</div></article><article class="card card-color blue"><div class="card-title">Beskriv försäljningsprocessen</div><div class="card-text">Lista stegen, förklara syftet med varje steg och visa vad som händer om ett steg hoppas över.</div></article><article class="card card-color yellow"><div class="card-title">Beskriv kalkyler</div><div class="card-text">Förklara TB, marginal, pålägg eller nollpunkt med enkel beräkning.</div></article><article class="card card-color purple"><div class="card-title">Beskriv avtalsrätt</div><div class="card-text">Förklara anbud, accept, avtal, avtalsbrott och varför tydliga villkor minskar risk.</div></article></div>
   </section>
 
   <section id="sista-repetition" class="section-anchor" aria-labelledby="sista-title">
     <h2 id="sista-title" class="section-title">Sista repetitionen före tenta</h2>
     <p class="lead">Snabb repetition med begrepp, tentafrågor, mini-case och checklista.</p>
-    <div class="pdf-link"><span class="label">Kopplat kursmaterial</span><br>Repetition av Affärsmannaskap 1-10 med fokus på kriterierna och typiska tentafrågor.</div>
+    <div class="pdf-link"><span class="label">Kopplat kursmaterial</span><br>Repetition av Affärsmannaskap 1-12 med fokus på kriterierna och typiska tentafrågor.</div>
     <h3 class="sub-title">20 snabba begrepp</h3>
     <div class="card-grid cols2">
       <details class="flashcard"><summary>Kundbehov</summary><p>Det kunden behöver för att lösa ett problem eller nå ett mål. Kan vara uttalat, underliggande eller latent.</p></details><details class="flashcard"><summary>Kundnytta</summary><p>Den konkreta effekt kunden får av lösningen, till exempel sparad tid, lägre risk eller bättre kvalitet.</p></details><details class="flashcard"><summary>FAB</summary><p>Feature, Advantage och Benefit. Används för att gå från egenskap till kundnytta.</p></details><details class="flashcard"><summary>5P</summary><p>Produkt, pris, plats, påverkan och personal/process. Beskriver erbjudandets marknadsmix.</p></details><details class="flashcard"><summary>Differentiering</summary><p>Hur företaget skiljer sig från konkurrenter genom exempelvis kvalitet, service, pris eller specialistkunskap.</p></details><details class="flashcard"><summary>SWOT</summary><p>Styrkor, svagheter, möjligheter och hot. Interna faktorer är styrkor/svagheter; externa är möjligheter/hot.</p></details><details class="flashcard"><summary>PESTLIED</summary><p>Omvärldsanalys med politiska, ekonomiska, sociala, tekniska, legala, internationella, ekologiska och demografiska faktorer.</p></details><details class="flashcard"><summary>Affärsidé</summary><p>Beskriver vad företaget gör, för vem, hur det görs och varför kunden ska välja erbjudandet.</p></details><details class="flashcard"><summary>Prospektering</summary><p>Att hitta och bedöma möjliga kunder utifrån behov, betalningsförmåga och beslutsmöjlighet.</p></details><details class="flashcard"><summary>Invändning</summary><p>Kundens tveksamhet, till exempel pris, risk eller timing. Ska förstås innan den bemöts.</p></details><details class="flashcard"><summary>BATNA</summary><p>Ditt bästa alternativ om förhandlingen misslyckas.</p></details><details class="flashcard"><summary>Win-win</summary><p>Överenskommelse där båda parter får viktiga intressen uppfyllda och relationen kan fortsätta.</p></details><details class="flashcard"><summary>Intäkt</summary><p>Värde av försäljning. Skilj från inbetalning, som handlar om när pengar kommer in.</p></details><details class="flashcard"><summary>Kostnad</summary><p>Värde av resurser som förbrukas, till exempel lön, material, licenser och hyra.</p></details><details class="flashcard"><summary>Täckningsbidrag</summary><p>Särintäkt minus särkostnad. Visar bidrag till fasta kostnader och vinst.</p></details><details class="flashcard"><summary>Marginal</summary><p>Andel av priset som återstår efter kostnad. Används för att bedöma lönsamhet.</p></details><details class="flashcard"><summary>Likviditet</summary><p>Förmåga att betala på kort sikt. Ett företag kan vara lönsamt men ändå ha svag likviditet.</p></details><details class="flashcard"><summary>Anbud</summary><p>Erbjudande med tydliga villkor. Kan vara bindande under den tid mottagaren får acceptera.</p></details><details class="flashcard"><summary>Accept</summary><p>Ja till anbudets villkor. Ändrad accept kan räknas som nytt anbud.</p></details><details class="flashcard"><summary>Upphandling</summary><p>Reglerad inköpsprocess i offentlig sektor där krav, anbudstid, utvärdering och avtal styrs tydligt.</p></details>
@@ -426,10 +433,451 @@ details.flashcard p{color:var(--muted);font-size:13px;margin:.55rem 0 0}
     <ul class="two-col-list"><li>Kundbehov och kundnytta</li><li>FAB och 5P</li><li>SWOT och PESTLIED</li><li>Försäljningsprocessens 8 steg</li><li>Säljsamtalets struktur</li><li>Invändningar och argument</li><li>BATNA, målpris och smärtgräns</li><li>Intäkt, kostnad och resultat</li><li>Budget, likviditet och nyckeltal</li><li>Anbud, accept, avtal och upphandling</li></ul>
   </section>
 
+  <section id="instudering" class="section-anchor" aria-labelledby="instudering-title">
+    <h2 id="instudering-title" class="section-title">Instuderingsfrågor och svar</h2>
+    <p class="lead">Här finns instuderingsfrågorna med korta, tentamässiga svar baserade på kursmaterialet i Affärsmannaskap.</p>
+
+    <div class="pdf-link">
+      <span class="label">Kopplat kursmaterial</span><br>
+      Bygger på Instudering.pdf och relevanta delar av Affärsmannaskap 1-12.
+    </div>
+
+    <article class="card">
+      <div class="card-title">1. Vilka målgrupper omfattas av marknadsföringslagen?</div>
+      <div class="card-text">
+        <p>Marknadsföringslagen omfattar marknadsföring som riktas mot både konsumenter och näringsidkare. Den skyddar privatpersoner, företag och andra aktörer som påverkas av marknadsföring. Lagen gäller vid marknadsföring av produkter, tjänster och andra erbjudanden. Syftet är att marknadsföring ska vara korrekt, tydlig och inte vilseledande.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">2. Beskriv begreppen vision, mission och värderingar.</div>
+      <div class="card-text">
+        <p>Vision beskriver företagets långsiktiga ambition och önskade framtid. Mission beskriver varför verksamheten finns och vilket uppdrag företaget har. Värderingar beskriver vad företaget står för och hur det vill agera mot kunder, medarbetare och samarbetspartners. Tillsammans fungerar de som en plattform för riktning, kultur och beslut.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">3. Vad ligger i begreppet affärsidé?</div>
+      <div class="card-text">
+        <p>Affärsidén beskriver vad företaget gör, för vem, hur det skapar värde och varför kunden ska välja företaget. Den kopplar ihop kundbehov, erbjudande, målgrupp och konkurrensfördel. En bra affärsidé ska vara tillräckligt konkret för att kunna testas mot marknad, resurser och ekonomi.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">4. Ge exempel på olika roller inom sälj i konsultvärlden.</div>
+      <div class="card-text">
+        <p>Exempel på roller är prospekterande säljare, account manager, key account manager, bid manager, presales-konsult, konsultchef och leveransansvarig. I konsultvärlden samverkar ofta den som bygger relationen, den som förstår kundens tekniska behov och den som ansvarar för leveransen. Konsulten själv kan också bidra till sälj genom förtroende, merförsäljning och behovsupptäckt.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">5. Förklara vad balans- och resultaträkning innehåller, och vad man kan utläsa ur dessa.</div>
+      <div class="card-text">
+        <p>Resultaträkningen visar företagets intäkter, kostnader och resultat under en period. Balansräkningen visar företagets ekonomiska ställning vid en viss tidpunkt genom tillgångar, skulder och eget kapital. Resultaträkningen visar lönsamhet, medan balansräkningen visar hur företaget är finansierat och vilka resurser det har.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">6. Vad innehåller begreppet affärsmannaskap?</div>
+      <div class="card-text">
+        <p>Affärsmannaskap handlar om att skapa affärer som är värdefulla för kunden och hållbara för företaget. Det omfattar kundbehov, erbjudande, värde, ekonomi, ansvar, relationer och långsiktighet. En affär är inte bara bra för att kunden säger ja, utan också för att den är lönsam, möjlig att leverera och bygger förtroende.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">7. Hur räknar man ut kassalikviditet och soliditet? Vad visar de?</div>
+      <div class="card-text">
+        <p>Kassalikviditet räknas vanligtvis som omsättningstillgångar exklusive varulager dividerat med kortfristiga skulder. Den visar företagets kortsiktiga betalningsförmåga. Soliditet räknas som eget kapital dividerat med totala tillgångar. Den visar hur stor del av företaget som är finansierat med eget kapital och säger något om långsiktig finansiell styrka.</p>
+        <span class="formula">Kassalikviditet = omsättningstillgångar exkl. varulager / kortfristiga skulder</span>
+        <span class="formula">Soliditet = eget kapital / totala tillgångar</span>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">8. Vad innehåller begreppet konsultmässighet?</div>
+      <div class="card-text">
+        <p>Konsultmässighet handlar om att agera professionellt i kundrelationen. Det innebär att förstå kundens behov, vara tydlig, hålla löften, följa upp, vara proaktiv och ta ansvar för både relation och leverans. En konsult ska inte bara lösa en teknisk uppgift, utan också skapa affärsnytta och trygghet för kunden.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">9. Vad innebär det att vi har tecknat ett ramavtal med en kund?</div>
+      <div class="card-text">
+        <p>Ett ramavtal innebär att parterna har kommit överens om övergripande villkor för framtida köp eller avrop. Det kan reglera priser, leveransformer, ansvar, sekretess och andra villkor. Kunden behöver då inte förhandla alla villkor från början varje gång, utan kan göra avrop inom ramen för avtalet.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">10. Vad ingår i begreppet FAB? Vad betyder det och vad innebär det?</div>
+      <div class="card-text">
+        <p>FAB står för Feature, Advantage och Benefit. Feature är egenskapen, Advantage är fördelen och Benefit är kundnyttan. Modellen används för att översätta vad produkten eller tjänsten har till varför det är värdefullt för kunden. Ett starkt tentasvar avslutar alltid med konkret kundnytta.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">11. Vad ingår i en PESTLIED omvärldsanalys och hur kan man använda den som verktyg?</div>
+      <div class="card-text">
+        <p>PESTLIED står för politiska, ekonomiska, sociala, tekniska, legala, internationella, ekologiska och demografiska faktorer. Analysen används för att förstå omvärlden och hur den påverkar marknad, kunder, risker, regler och möjligheter. I IT kan exempelvis AI, GDPR, konjunktur, kompetensbrist och hållbarhetskrav påverka strategi och erbjudande.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">12. Beskriv tre företagsformer och vad som kännetecknar dessa.</div>
+      <div class="card-text">
+        <p>Enskild näringsverksamhet drivs av en person som är personligt ansvarig för verksamheten. Handelsbolag drivs av minst två delägare som normalt har personligt och solidariskt ansvar. Aktiebolag är en juridisk person där bolaget ansvarar för skulderna, kräver aktiekapital och har tydligare formella krav på exempelvis styrelse och årsredovisning.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">13. Vad innebär cold calls eller canvasbesök?</div>
+      <div class="card-text">
+        <p>Cold calls innebär att man kontaktar potentiella kunder utan att de tidigare visat intresse. Canvasbesök är uppsökande försäljning genom fysiska eller direkta kundbesök. Syftet är att hitta nya kunder, boka möten eller skapa intresse. Det kräver tydlig målgrupp, kort budskap och förmåga att snabbt skapa relevans.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">14. Vad är det för skillnad mellan företagsekonomi och projektekonomi?</div>
+      <div class="card-text">
+        <p>Företagsekonomi handlar om hela företagets intäkter, kostnader, resultat, budget, likviditet och långsiktiga lönsamhet. Projektekonomi handlar om ekonomin i ett enskilt projekt, till exempel projektbudget, timmar, kostnader, intäkter, marginal och risk. Ett projekt kan vara lönsamt även om företaget totalt har problem, och tvärtom.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">15. Vad ingår i modellen 5P och hur använder vi det?</div>
+      <div class="card-text">
+        <p>5P används för att beskriva erbjudandet genom produkt, pris, plats, påverkan och personal/process. Produkt är vad som erbjuds, pris är betalningsmodell och värde, plats är hur kunden får tillgång till erbjudandet, påverkan är kommunikationen och personal/process handlar om hur leveransen skapas. Modellen hjälper oss kontrollera att erbjudandet hänger ihop med målgruppens behov.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">16. Vilka beslutskriterier används vid offentlig upphandling?</div>
+      <div class="card-text">
+        <p>Vid offentlig upphandling används kriterier som bästa förhållande mellan pris och kvalitet, kostnad eller pris. Skallkrav måste uppfyllas för att anbudet ska kunna prövas. Därefter används utvärderingskriterier för att välja det bästa godkända anbudet.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">17. Vad ingår i begreppet paketering och ge exempel utifrån IT-branschen?</div>
+      <div class="card-text">
+        <p>Paketering innebär att göra ett erbjudande tydligt genom att bestämma målgrupp, innehåll, prisbild, funktioner, fördelar och nyttor. Det gör erbjudandet lättare att förstå och köpa. I IT-branschen kan exempel vara supportpaket, molndrift som abonnemang, cybersäkerhetspaket eller fastprisprojekt för webbplats.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">18. Vilka fyra delar består en årsredovisning av?</div>
+      <div class="card-text">
+        <p>En årsredovisning består av balansräkning, resultaträkning, förvaltningsberättelse och revisionsberättelse. Balansräkningen visar tillgångar, skulder och eget kapital. Resultaträkningen visar intäkter, kostnader och resultat. Förvaltningsberättelsen beskriver året och revisionsberättelsen innehåller revisorns bedömning.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">19. Vid strategisk/komplex försäljning kan man identifiera fyra olika köparroller. Vilka är de?</div>
+      <div class="card-text">
+        <p>Vanliga köparroller är ekonomisk beslutsfattare, teknisk beslutsfattare, användare och coach eller intern sponsor. Den ekonomiska rollen påverkar budget och affärsbeslut, den tekniska bedömer krav och lösning, användaren påverkar praktisk nytta och coachen hjälper säljaren förstå kundens organisation. Syftet är att förstå vem som påverkar beslutet och vad varje roll behöver för att säga ja.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">20. Förklara och ge exempel på differentiering och positionering relaterat till IT-branschen.</div>
+      <div class="card-text">
+        <p>Differentiering handlar om hur företaget skiljer sig från konkurrenter, exempelvis genom specialistkompetens, service, pris, kvalitet eller trygghet. Positionering handlar om vilken plats företaget vill ta i kundens medvetande. I IT kan ett företag positionera sig som “tryggaste cybersäkerhetspartnern för småföretag” och differentiera sig genom snabb support, certifieringar och tydliga säkerhetsprocesser.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">21. Vad är eget kapital och hur räknar man ut det? Vad visar det?</div>
+      <div class="card-text">
+        <p>Eget kapital är skillnaden mellan företagets tillgångar och skulder. Det visar hur stor del av företaget som är finansierat av ägare och tidigare vinster. Eget kapital används också vid beräkning av soliditet och visar företagets finansiella styrka.</p>
+        <span class="formula">Eget kapital = tillgångar - skulder</span>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">22. Vad betyder RFI och vad avses?</div>
+      <div class="card-text">
+        <p>RFI betyder Request for Information. Det är en informationsförfrågan där kunden vill få kunskap om marknaden, möjliga lösningar eller leverantörer. En RFI är normalt inte en färdig offertförfrågan utan ett steg för att samla information inför en eventuell upphandling eller RFP.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">23. Vad betyder USP och ESP och vad skiljer dem åt? Ge exempel.</div>
+      <div class="card-text">
+        <p>USP betyder Unique Selling Proposition och handlar om ett rationellt, tydligt säljargument som skiljer erbjudandet från konkurrenter. ESP betyder Emotional Selling Proposition och handlar om känslomässigt värde, till exempel trygghet, status eller förtroende. Exempel: USP kan vara “24/7 support med garanterad svarstid”, medan ESP kan vara “du kan känna dig trygg med att systemen fungerar när det verkligen gäller”.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">24. Ge exempel på två olika tillgångsslag.</div>
+      <div class="card-text">
+        <p>Två vanliga tillgångsslag är anläggningstillgångar och omsättningstillgångar. Anläggningstillgångar används långsiktigt, till exempel datorer, maskiner eller inventarier. Omsättningstillgångar är mer kortfristiga, till exempel kundfordringar, varulager och pengar på banken.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">25. Vad är omni vs multikanal och vad skiljer dem åt?</div>
+      <div class="card-text">
+        <p>Multikanal betyder att företaget använder flera kanaler, till exempel webb, mejl, telefon och fysiska möten. Omnikanal betyder att kanalerna hänger ihop och ger kunden en sammanhållen upplevelse. Skillnaden är alltså integrationen: i multikanal finns flera kanaler, i omnikanal samverkar de.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">26. Beskriv de fem kundstrategierna i kundsegmenteringsmodellen.</div>
+      <div class="card-text">
+        <p>En praktisk kundsegmenteringsmodell kan innehålla strategierna satsa, utveckla, behålla, effektivisera och avveckla. “Satsa” gäller kunder med hög potential, “utveckla” gäller kunder där merförsäljning är möjlig, “behålla” gäller lönsamma stabila kunder, “effektivisera” gäller kunder som ska hanteras med lägre kostnad och “avveckla” gäller kunder som inte är lönsamma eller strategiskt relevanta. Poängen är att alla kunder inte ska bearbetas på samma sätt.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">27. Vilka tre huvudsakliga steg innehåller kundens köpprocess och varför är det viktigt?</div>
+      <div class="card-text">
+        <p>Tre vanliga steg är behovsupptäckt, utvärdering av alternativ och beslut/köp. För säljaren är det viktigt att förstå var kunden befinner sig i processen. En kund som inte förstått sitt problem behöver frågor och insikt, medan en kund nära beslut behöver tydligt värde, riskminskning och nästa steg.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">28. Vad är skillnaden mellan bundet och fritt eget kapital?</div>
+      <div class="card-text">
+        <p>Bundet eget kapital är kapital som inte får delas ut till ägarna, exempelvis aktiekapital. Fritt eget kapital kan användas för utdelning om reglerna tillåter och bolagets ekonomi klarar det. Skillnaden är viktig eftersom bundet kapital fungerar som skydd för bolaget och dess borgenärer.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">29. Vad är TB och vad står det för och vad ingår i begreppet?</div>
+      <div class="card-text">
+        <p>TB står för täckningsbidrag. Det räknas som särintäkt minus särkostnad och visar hur mycket en affär bidrar till fasta kostnader och vinst. TB används för att bedöma lönsamhet i en enskild affär eller produkt.</p>
+        <span class="formula">TB = särintäkt - särkostnad</span>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">30. Beskriv innehållet i en Ansoff-matris och hur används den?</div>
+      <div class="card-text">
+        <p>Ansoff-matrisen används för att analysera tillväxtstrategier utifrån befintliga eller nya produkter och befintliga eller nya marknader. De fyra strategierna är marknadspenetration, marknadsutveckling, produktutveckling och diversifiering. Modellen används för att bedöma hur företaget kan växa och hur stor risk olika tillväxtvägar innebär.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">31. Vad är vanliga skäl till att man misslyckas i sitt försäljningsarbete?</div>
+      <div class="card-text">
+        <p>Vanliga skäl är otydlig målgrupp, svag behovsanalys, att man presenterar lösningen för tidigt, att man inte når rätt beslutsfattare, bristande uppföljning och svag argumentation. Andra orsaker är att man fokuserar för mycket på pris, inte hanterar invändningar eller inte skapar tydligt nästa steg. Många misslyckanden beror på att säljaren inte förstår kundens köpprocess.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">32. Beskriv innehåll i och nyttan med “tratten” eller pipeline för mig i min roll som säljare.</div>
+      <div class="card-text">
+        <p>Tratten eller pipeline visar affärsmöjligheter i olika steg, till exempel prospekt, kontakt, behovsanalys, offert, förhandling, avslut och uppföljning. Den hjälper säljaren att se vilka affärer som finns, sannolikhet för avslut och kommande intäkter. Den används också för att prioritera tid och upptäcka var affärer fastnar.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">33. Vad betyder RFP och vad avses?</div>
+      <div class="card-text">
+        <p>RFP betyder Request for Proposal. Det är en förfrågan där kunden ber leverantörer lämna förslag på lösning, pris, leverans och villkor. En RFP är mer konkret än en RFI och används ofta när kunden redan har definierat ett behov.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">34. Vad är EBIT och var hittar man det någonstans?</div>
+      <div class="card-text">
+        <p>EBIT betyder Earnings Before Interest and Taxes, på svenska rörelseresultat. Det visar resultatet före finansiella poster och skatt. Man hittar EBIT i resultaträkningen.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">35. Vad beskriver en affärsplan i stort?</div>
+      <div class="card-text">
+        <p>En affärsplan beskriver företagets idé, mål, kunder, erbjudande, marknad, resurser, ekonomi och aktiviteter. Den visar hur företaget tänker skapa värde, nå sina kunder och bli lönsamt. Den kan innehålla affärsidé, vision, SWOT, marknadsplan, budget och affärsmodell.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">36. Beskriv tre olika typer av frågor du kan ha användning för i mötet med kunden.</div>
+      <div class="card-text">
+        <p>Situationsfrågor används för att förstå nuläget, exempelvis “Hur arbetar ni idag?” Problemfrågor används för att hitta svårigheter, exempelvis “Vad fungerar sämst?” Konsekvens- eller värdefrågor används för att förstå affärseffekten, exempelvis “Vad kostar problemet?” eller “Vad skulle en bättre lösning ge?”</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">37. Vad är en förvaltningsberättelse?</div>
+      <div class="card-text">
+        <p>Förvaltningsberättelsen är en del av årsredovisningen. Den beskriver viktiga händelser under året och ger sammanhang till siffrorna i årsredovisningen. Den kan förklara utveckling, risker, förändringar och annat som påverkat verksamheten.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">38. Beskriv utförligt de huvudsakliga stegen i den generella säljprocessen.</div>
+      <div class="card-text">
+        <p>En generell säljprocess börjar med prospektering, där man hittar möjliga kunder. Därefter följer förberedelse, första kontakt, behovsanalys, presentation av lösning, invändningshantering, offert eller förhandling, avslut och uppföljning. Varje steg har ett syfte: att gå från okänd kund till förstått behov, relevant lösning och genomförd affär. Uppföljningen är viktig för kundnöjdhet, relation och framtida affärer.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">39. Vad ingår i begreppet marknadsföring?</div>
+      <div class="card-text">
+        <p>Marknadsföring omfattar aktiviteter som skapar kännedom, intresse och efterfrågan på produkter eller tjänster. Det kan vara reklam, kundkommunikation, sociala medier, utskick, mässor, webbinarier, kundbesök, demos och tryckt material. Marknadsföring ska kopplas till målgrupp, positionering, differentiering och försäljning.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">40. Vad är en revisionsberättelse?</div>
+      <div class="card-text">
+        <p>Revisionsberättelsen skrivs av revisorn. Den innehåller revisorns bedömning av årsredovisningen och företagets förvaltning. Den kan visa om revisorn anser att årsredovisningen ger en rättvisande bild och om det finns anmärkningar.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">41. Vad ingår bland annat i ett lösningsförslag som vi lämnar till kund?</div>
+      <div class="card-text">
+        <p>Ett lösningsförslag bör beskriva kundens behov, föreslagen lösning, omfattning, nyttor, leverans, tidplan, pris, ansvar, förutsättningar och villkor. I IT kan det även innehålla teknisk lösning, supportnivå, implementation, säkerhet, licenser och uppföljning. Förslaget ska visa varför lösningen passar kundens situation.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">42. Vad är en marknadsplan och ge exempel på aktiviteter i en sådan.</div>
+      <div class="card-text">
+        <p>En marknadsplan beskriver hur företaget ska nå sina mål genom marknadsföring och kommunikation. Den kan innehålla nuläge, målgrupp, positionering, budskap, aktiviteter, budget och uppföljning. Exempel på aktiviteter är mässor, webbinarier, kundbesök, utskick, annonser, demos, sociala medier och referenscase.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">43. Vad är en likviditetsbudget och vad visar den?</div>
+      <div class="card-text">
+        <p>En likviditetsbudget visar förväntade inbetalningar och utbetalningar över tid. Den hjälper företaget att se om det finns pengar för att betala räkningar, löner och andra kortfristiga skulder. Den är viktig eftersom ett företag kan vara lönsamt men ändå få problem om pengarna kommer in för sent.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">44. Beskriv vad som avses med en prognos.</div>
+      <div class="card-text">
+        <p>En prognos är en uppdaterad bedömning av framtida utfall. Den bygger ofta på budgeten men justeras när man får ny information. Prognoser används för att följa upp verksamheten och bedöma om mål, intäkter, kostnader eller resultat behöver revideras.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">45. Vad är en affärsmodell, exemplifiera.</div>
+      <div class="card-text">
+        <p>En affärsmodell beskriver hur företaget skapar, levererar och tjänar pengar på värde. Exempel är prenumeration, licensmodell, konsulttimmar, fastprisprojekt, plattform eller freemium. I IT kan en affärsmodell vara månadsabonnemang för support, molntjänst i olika nivåer eller konsulttjänster per timme.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">46. Vinnande argumentation – ge minst tre konkreta förslag på vinnande argumentation.</div>
+      <div class="card-text">
+        <p>För det första: koppla argumentet till kundens behov, inte bara till produktens egenskaper. För det andra: använd FAB så att egenskap blir fördel och tydlig kundnytta. För det tredje: använd ekonomiska argument, exempelvis minskad tid, lägre risk eller bättre produktivitet. Man kan också stärka argumentationen med referenser, bevis, jämförelser och riskminskning.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">47. Vad innebär en SWOT-analys och hur använder man den?</div>
+      <div class="card-text">
+        <p>SWOT står för Strengths, Weaknesses, Opportunities och Threats. Styrkor och svagheter är interna faktorer, medan möjligheter och hot är externa faktorer. Analysen används för att förstå nuläge, affärsidé, marknad eller konkurrensläge. Ett bra svar visar också vad analysen leder till: satsa, ändra, minska risk eller avstå.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">48. Varför gör man ett Business Case?</div>
+      <div class="card-text">
+        <p>Ett Business Case görs för att bedöma om en satsning är affärsmässigt motiverad. Det väger nyttor, kostnader, risker, intäkter och alternativ mot varandra. I IT kan ett Business Case visa om ett nytt system, en investering eller ett kundprojekt är lönsamt och strategiskt rimligt.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">49. Ge två exempel på hur jag kan hantera invändningar.</div>
+      <div class="card-text">
+        <p>Ett sätt är att lyssna, bekräfta, ställa följdfråga och sedan bemöta. Vid prisinvändning kan man fråga: “Vad jämför ni med?” Ett annat sätt är att omvandla invändningen till behov. Om kunden säger att lösningen känns riskfylld kan säljaren prata om support, referenser, garanti eller stegvis implementation.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">50. Ge minst fem exempel på vad som är viktigt vid förhandlingsteknik.</div>
+      <div class="card-text">
+        <p>Viktigt är att känna sin BATNA, ha ett målpris, känna sin smärtgräns, förstå motpartens intressen och inte ge eftergifter utan motprestation. Det är också viktigt att skilja på position och intresse, förbereda alternativa lösningar och säkerställa att avtalet blir tydligt. En bra förhandling ska helst skapa värde för båda parter.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">51. Beskriv två metoder för att få till ett avslut på en säljprocess.</div>
+      <div class="card-text">
+        <p>En metod är alternativavslut, till exempel: “Vill ni starta i juni eller augusti?” Det gör beslutet konkret utan att bara fråga ja eller nej. En annan metod är sammanfattningsavslut: säljaren sammanfattar behov, lösning, nytta och nästa steg och frågar om kunden är redo att gå vidare.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">52. Förklara SPIN-modellen och ge exempel på minst två frågor per område i SPIN.</div>
+      <div class="card-text">
+        <p>SPIN står för Situation, Problem, Implication och Need-payoff. Situationsfrågor: “Hur arbetar ni idag?” och “Vilka system använder ni?” Problemfrågor: “Vad fungerar dåligt?” och “Var uppstår mest tidsspillan?” Implication-frågor: “Vad leder problemen till?” och “Hur påverkar det kostnader eller kunder?” Need-payoff-frågor: “Vad skulle en bättre lösning ge?” och “Hur skulle det påverka resultatet?”</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">53. På vilket sätt skiljer sig Insight selling från andra säljmodeller?</div>
+      <div class="card-text">
+        <p>Insight selling skiljer sig genom att säljaren tillför nya insikter som kunden inte själv har formulerat. I stället för att bara fråga fram behov hjälper säljaren kunden att se problem, risker eller möjligheter på ett nytt sätt. Det passar särskilt i komplex B2B-försäljning där kunden inte alltid vet exakt vilken lösning som behövs.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">54. Vad kan ingå i en konkurrentanalys och hur använder man den?</div>
+      <div class="card-text">
+        <p>En konkurrentanalys kan innehålla konkurrenternas erbjudanden, priser, målgrupper, styrkor, svagheter, positionering, kanaler och kundrelationer. Den används för att förstå hur företaget kan skilja sig från andra och vilka argument som är starka. I IT kan man jämföra supportnivå, säkerhetskompetens, certifieringar, leveransmodell och pris.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">55. För vilka gäller marknadsföringslagen och vad gäller den för?</div>
+      <div class="card-text">
+        <p>Marknadsföringslagen gäller företag och andra aktörer som marknadsför produkter, tjänster eller andra erbjudanden. Den skyddar både konsumenter och näringsidkare. Den gäller reklam, försäljning och annan kommunikation som syftar till att främja försäljning eller tillgång till en produkt eller tjänst.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">56. Vad är ett NDA? Vad betyder det och vad innebär det?</div>
+      <div class="card-text">
+        <p>NDA betyder Non-Disclosure Agreement, alltså sekretessavtal. Det innebär att parter lovar att inte sprida viss information, exempelvis kunddata, affärsidéer, teknik, priser eller strategier. NDA används ofta innan djupare dialog, offertarbete eller samarbete där känslig information delas.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">57. Beskriv delarna i offentlig upphandling och hur processen går till.</div>
+      <div class="card-text">
+        <p>Processen börjar med behovsanalys och förberedelser. Därefter tas upphandlingsdokument fram, upphandlingen annonseras, leverantörer lämnar anbud, anbuden utvärderas och avtal tecknas. Leverantören måste följa skallkrav, tidsfrister och utvärderingskriterier noggrant.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">58. Vilka är kriterierna i offentlig upphandling enligt LOU?</div>
+      <div class="card-text">
+        <p>Enligt LOU används kriterier som bästa förhållande mellan pris och kvalitet, kostnad eller pris. Skallkrav måste vara uppfyllda för att ett anbud ska kunna utvärderas. Därefter används utvärderingskriterier för att välja det bästa godkända anbudet.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">59. Vad är speciellt förbjudet i marknadsföringslagen?</div>
+      <div class="card-text">
+        <p>Marknadsföringslagen förbjuder särskilt vilseledande och aggressiv marknadsföring. Det ska tydligt framgå att det är marknadsföring och vem som ansvarar för den. Exempel på otillåtet är falska gratiserbjudanden, otydliga villkor eller påståenden som vilseleder kunden.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">60. Vad är ramverket för scenarioplanering med kopplade handlingsplaner?</div>
+      <div class="card-text">
+        <p>Ramverket består av scenarioanalys, effektanalys och handlingsplaner. Scenarioanalysen beskriver möjliga framtida lägen, exempelvis optimistiskt, realistiskt och pessimistiskt. Effektanalysen bedömer konsekvenserna av varje scenario. Handlingsplanerna beskriver vad företaget ska göra beroende på vilket scenario som blir aktuellt.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-title">61. Vad ligger i begreppet marknadsföring?</div>
+      <div class="card-text">
+        <p>Marknadsföring handlar om hur företaget når målgrupper, kommunicerar värde och skapar efterfrågan. Det omfattar målgruppsval, positionering, differentiering, kanalval, kampanjer, sociala medier, kundbesök, demos och uppföljning. Marknadsföring ska hänga ihop med försäljning och företagets erbjudande.</p>
+      </div>
+    </article>
+  </section>
+
   <section id="whats-new" class="section-anchor" aria-labelledby="whats-new-title">
     <h2 id="whats-new-title" class="section-title">What's New?</h2>
     <p class="lead">Senaste ändringen i tentamanualen.</p>
-    <div class="answerbox"><span class="label">Senaste uppdatering</span><br>Förhandlingsteknik har förtydligats inför tenta. De sex begreppskorten för BATNA, målpris, smärtgräns, eftergifter, win-win och intressen har fått mer användbara förklaringar, och BATNA har även en separat förklaringsruta med exempel.</div>
+    <div class="answerbox"><span class="label">Senaste uppdatering</span><br>Materialet har uppdaterats för Affärsmannaskap 1-12 och fått en ny sektion med instuderingsfrågor och korta tentasvar.</div>
     <div class="note"><span class="label">Att uppdatera framöver</span><br>När materialet ändras nästa gång kan den här rutan uppdateras kort med vad som ändrats och varför det är relevant för repetitionen.</div>
   </section>
 </main>
