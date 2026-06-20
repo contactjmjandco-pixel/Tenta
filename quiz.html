@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="sv">
 <head>
 <meta charset="UTF-8">
@@ -15,6 +15,7 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:'DM Sans',Arial
 .topbar-inner{max-width:960px;margin:0 auto;padding:1rem 1.25rem;display:flex;justify-content:space-between;gap:1rem;align-items:center}
 .brand h1{font-family:'DM Serif Display',Georgia,serif;font-size:28px;font-weight:400;margin:0;line-height:1}
 .brand p{margin:.2rem 0 0;color:var(--muted);font-size:13px}
+.mobile-title{display:none;font-family:'DM Serif Display',Georgia,serif;font-size:24px;line-height:1;color:var(--text)}
 .back-link{border:1px solid #cfcac0;border-radius:6px;padding:.45rem .75rem;color:var(--muted);text-decoration:none;font-size:13px;background:#fff}
 .back-link:hover,.back-link:focus{border-color:var(--accent);color:var(--accent);outline:2px solid transparent}
 main{max-width:960px;margin:0 auto;padding:2rem 1.25rem 4rem}
@@ -28,6 +29,10 @@ main{max-width:960px;margin:0 auto;padding:2rem 1.25rem 4rem}
 .option:hover,.option:focus{border-color:var(--accent);outline:2px solid transparent;background:#fbfdfb}
 .option.correct{border-color:var(--accent);background:var(--accent-soft);color:#174f42;font-weight:700}
 .option.wrong{border-color:var(--danger);background:var(--danger-soft);color:#7a2f24}
+.input-answer{display:grid;gap:.75rem;max-width:680px}
+.input-answer input{width:100%;min-height:54px;border:1px solid var(--border);background:var(--card);border-radius:8px;padding:.9rem 1rem;font:inherit;font-size:17px;color:var(--text)}
+.input-answer input:focus{border-color:var(--accent);outline:2px solid transparent;background:#fbfdfb}
+.input-answer .hint{font-size:14px;color:var(--muted);margin:.1rem 0}
 .feedback{display:none;border:1px solid #d9cfe7;background:#fbf8ff;color:#3f3550;border-radius:8px;padding:1rem 1.1rem;margin:1rem 0}
 .feedback strong{display:inline-block;background:#efe6fb;color:#68439a;border:1px solid #d7c1ef;border-radius:999px;padding:.22rem .5rem;margin-bottom:.55rem;font-size:10px;letter-spacing:.12em;text-transform:uppercase}
 .actions{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1rem}
@@ -38,7 +43,7 @@ main{max-width:960px;margin:0 auto;padding:2rem 1.25rem 4rem}
 .result{display:none;background:var(--paper);border:1px solid var(--border);border-radius:8px;padding:1.35rem;box-shadow:0 12px 30px rgba(30,30,27,.06)}
 .result h2{font-family:'DM Serif Display',Georgia,serif;font-size:34px;font-weight:400;margin:.2rem 0 .6rem}
 .result-number{font-size:20px;font-weight:700;margin:.3rem 0;color:var(--accent)}
-@media (max-width:680px){.topbar-inner{align-items:flex-start;flex-direction:column}.question{font-size:25px}.quiz-shell,.result{padding:1rem}.options{min-height:17rem}.option{padding:.8rem}.meta{align-items:flex-start;flex-direction:column;gap:.25rem}}
+@media (max-width:680px){.topbar-inner{align-items:center;flex-direction:row;justify-content:flex-start}.brand{display:none}.mobile-title{display:block}.question{font-size:25px}.quiz-shell,.result{padding:1rem}.options{min-height:17rem}.option{padding:.8rem}.meta{align-items:flex-start;flex-direction:column;gap:.25rem}}
 </style>
 </head>
 <body>
@@ -48,6 +53,7 @@ main{max-width:960px;margin:0 auto;padding:2rem 1.25rem 4rem}
       <h1>Affärsmannaskap Quiz</h1>
     </div>
     <a class="back-link" href="index.html">Till tentamanualen</a>
+    <span class="mobile-title" aria-hidden="true">Quiz</span>
   </div>
 </header>
 <main>
@@ -85,31 +91,31 @@ const questions = [
   {question:"Vad visar kassalikviditet?",options:["Företagets kortsiktiga betalningsförmåga","Hur starkt företagets varumärke är","Hur nöjda kunderna är efter leverans","Hur många leads säljaren har"],correct:0,explanation:"Kassalikviditet visar om företaget kan betala kortfristiga skulder med kortfristiga tillgångar."},
   {question:"Vad innebär konsultmässighet?",options:["Att agera professionellt, förstå kundbehov, skapa nytta och ta ansvar för leverans","Att bara sälja fler timmar oavsett kundnytta","Att undvika uppföljning efter leverans","Att alltid välja lägsta pris"],correct:0,explanation:"Konsultmässighet kombinerar professionalism, kundförståelse, tydlighet och ansvar."},
   {question:"Vad innebär ett ramavtal?",options:["Övergripande villkor för framtida köp eller avrop","Ett kvitto på en enstaka kontant betalning","En revisionsberättelse för årsredovisningen","En marknadsföringskampanj i flera kanaler"],correct:0,explanation:"Ramavtal reglerar grundvillkor så att framtida avrop kan göras enklare."},
-  {question:"Vad betyder FAB?",options:["Feature, Advantage och Benefit","Finance, Agreement och Budget","Forecast, Analysis och Balance","Function, Audience och Brand"],correct:0,explanation:"FAB betyder egenskap, fördel och kundnytta. Modellen hjälper dig argumentera utifrån kundens värde."},
-  {question:"Vad används PESTLIED till?",options:["Att analysera externa omvärldsfaktorer som påverkar marknad och affär","Att räkna ut täckningsbidrag per produkt","Att skriva en ren accept på ett anbud","Att välja färger i marknadsföring"],correct:0,explanation:"PESTLIED hjälper företaget förstå politiska, ekonomiska, sociala, tekniska, legala, internationella, ekologiska och demografiska faktorer."},
+  {question:"Vad betyder FAB?",options:["Feature, Advantage och Benefit","Finance, Agreement och Budget","Forecast, Analysis och Balance","Function, Audience och Brand"],correct:0,explanation:"FAB står för Feature, Advantage och Benefit, alltså egenskap, fördel och kundnytta. Använd modellen genom att först beskriva vad lösningen är, sedan vilken fördel den ger och till sist vilken konkret nytta kunden får."},
+  {question:"Vad används PESTLIED till?",options:["Att analysera externa omvärldsfaktorer som påverkar marknad och affär","Att räkna ut täckningsbidrag per produkt","Att skriva en ren accept på ett anbud","Att välja färger i marknadsföring"],correct:0,explanation:"PESTLIED används för omvärldsanalys. Bokstäverna står för politiska, ekonomiska, sociala, tekniska, legala, internationella, ekologiska och demografiska faktorer som kan påverka marknad, kunder och affärsidé."},
   {question:"Vilket kännetecken stämmer bäst på aktiebolag?",options:["Bolaget är en juridisk person och ägarna har normalt begränsat ansvar","Alla delägare har alltid personligt solidariskt ansvar","Det får bara drivas av en fysisk person","Det saknar formella krav på redovisning"],correct:0,explanation:"Aktiebolag är en juridisk person där bolaget ansvarar för skulderna, med krav på bland annat aktiekapital och formalia."},
   {question:"Vad innebär cold calls?",options:["Kontakt med potentiella kunder utan tidigare visat intresse","Uppföljning med befintlig kund efter leverans","Att teckna sekretessavtal före offert","Att räkna ut soliditet"],correct:0,explanation:"Cold calls är uppsökande kontakt med möjliga kunder för att skapa intresse eller boka möte."},
   {question:"Vad är projektekonomi?",options:["Ekonomin i ett enskilt projekt, till exempel budget, timmar, intäkter och risk","Företagets samlade årsredovisning","Kundens känslomässiga upplevelse av varumärket","Enbart reglerna för offentlig upphandling"],correct:0,explanation:"Projektekonomi fokuserar på om ett specifikt projekt är ekonomiskt hållbart."},
-  {question:"Vad ingår i 5P?",options:["Produkt, pris, plats, påverkan och personal/process","Pris, pipeline, prognos, plan och patent","Produkt, policy, personal, provision och pension","Position, profil, pitch, prospekt och paketering"],correct:0,explanation:"5P beskriver erbjudandets marknadsmix och hur det möter målgruppens behov."},
+  {question:"Vad ingår i 5P?",options:["Produkt, pris, plats, påverkan och personal/process","Pris, pipeline, prognos, plan och patent","Produkt, policy, personal, provision och pension","Position, profil, pitch, prospekt och paketering"],correct:0,explanation:"De 5P man är ute efter är produkt, pris, plats, påverkan och personal/process. Modellen beskriver erbjudandets marknadsmix och hur det möter målgruppens behov."},
   {question:"Vad är ett skallkrav i offentlig upphandling?",options:["Ett krav som måste uppfyllas för att anbudet ska kunna prövas","Ett önskemål som aldrig påverkar utvärderingen","En rabatt som alltid måste erbjudas","En muntlig överenskommelse efter avtal"],correct:0,explanation:"Skallkrav är obligatoriska. Om de inte uppfylls kan anbudet förkastas."},
   {question:"Vad innebär paketering av ett erbjudande?",options:["Att göra erbjudandet tydligt genom målgrupp, innehåll, pris, funktioner och nytta","Att endast byta namn på tjänsten","Att ta bort all kundkommunikation","Att undvika prisinformation"],correct:0,explanation:"Paketering gör det lättare för kunden att förstå, jämföra och köpa erbjudandet."},
   {question:"Vilka delar ingår normalt i en årsredovisning?",options:["Balansräkning, resultaträkning, förvaltningsberättelse och revisionsberättelse","SWOT, PESTLIED, FAB och 5P","Anbud, accept, BATNA och målpris","Pipeline, RFI, RFP och ESP"],correct:0,explanation:"Årsredovisningen ger både ekonomiska siffror och beskrivande information om året."},
   {question:"Vilken köparroll bedömer ofta krav och lösning tekniskt?",options:["Teknisk beslutsfattare","Revisor","Marknadsassistent","Extern konkurrent"],correct:0,explanation:"Den tekniska beslutsfattaren granskar om lösningen uppfyller tekniska krav och fungerar i kundens miljö."},
   {question:"Vad är differentiering?",options:["Hur företaget skiljer sig från konkurrenter på ett värdefullt sätt","Att alltid kopiera konkurrenternas erbjudande","Att bara sänka priset utan analys","Att undvika att välja målgrupp"],correct:0,explanation:"Differentiering kan handla om kvalitet, service, specialistkompetens, trygghet eller pris."},
   {question:"Hur räknar man ut eget kapital?",options:["Tillgångar minus skulder","Intäkter minus kostnader","Pris minus moms","Omsättning minus marknadsandel"],correct:0,explanation:"Eget kapital visar ägarnas andel av företagets finansiering och används bland annat vid soliditet."},
-  {question:"Vad betyder RFI?",options:["Request for Information","Resultat före investering","Revenue Forecast Index","Request for Invoice"],correct:0,explanation:"RFI är en informationsförfrågan där kunden samlar kunskap om marknad, lösningar eller leverantörer."},
+  {question:"Vad betyder RFI?",options:["Request for Information","Resultat före investering","Revenue Forecast Index","Request for Invoice"],correct:0,explanation:"RFI står för Request for Information. Det är en informationsförfrågan där kunden samlar kunskap om marknad, lösningar eller leverantörer innan en eventuell upphandling eller offertförfrågan."},
   {question:"Vad skiljer USP från ESP?",options:["USP är rationellt säljargument medan ESP är känslomässigt värde","USP är budget och ESP är balansräkning","USP är juridiskt krav och ESP är acceptfrist","USP är offentlig upphandling och ESP är avrop"],correct:0,explanation:"USP visar en unik rationell fördel. ESP lyfter känslor som trygghet, status eller förtroende."},
   {question:"Vilket är ett exempel på omsättningstillgång?",options:["Kundfordringar eller pengar på banken","Företagets långsiktiga vision","En kunds beslutsroll","Ett sekretessavtal"],correct:0,explanation:"Omsättningstillgångar är kortfristiga tillgångar som kan omsättas relativt snabbt."},
   {question:"Vad är skillnaden mellan multikanal och omnikanal?",options:["Omnikanal innebär att kanalerna hänger ihop; multikanal innebär flera kanaler","Multikanal är alltid juridiskt bindande medan omnikanal inte är det","Omnikanal betyder bara fysisk butik","Multikanal betyder att man bara använder en kanal"],correct:0,explanation:"I omnikanal samverkar kanalerna och ger kunden en sammanhållen upplevelse."},
   {question:"Varför används kundsegmenteringsstrategier?",options:["För att bearbeta olika kunder på olika sätt utifrån potential och lönsamhet","För att ge alla kunder exakt samma insats","För att slippa behovsanalys","För att ersätta budgetarbete"],correct:0,explanation:"Alla kunder är inte lika strategiskt viktiga, lönsamma eller utvecklingsbara."},
   {question:"Varför är kundens köpprocess viktig för säljaren?",options:["Den visar var kunden befinner sig och vilken typ av stöd säljaren bör ge","Den ersätter behovsanalysen helt","Den avgör företagets eget kapital","Den används bara i revisionsberättelser"],correct:0,explanation:"En kund tidigt i processen behöver insikt, medan en kund nära beslut behöver tydligt värde och nästa steg."},
   {question:"Vad är bundet eget kapital?",options:["Kapital som normalt inte får delas ut till ägarna","Alla pengar på bankkontot","Kundens obetalda fakturor","Företagets marknadsbudget"],correct:0,explanation:"Bundet eget kapital, till exempel aktiekapital, fungerar som skydd för bolaget och borgenärer."},
-  {question:"Vad står TB för?",options:["Täckningsbidrag","Total budget","Teknisk betalning","Tillgångsbalans"],correct:0,explanation:"TB = särintäkt minus särkostnad och visar bidrag till fasta kostnader och vinst."},
+  {question:"Vad står TB för?",options:["Täckningsbidrag","Total budget","Teknisk betalning","Tillgångsbalans"],correct:0,explanation:"TB står för täckningsbidrag. Det räknas som särintäkt minus särkostnad och visar hur mycket en produkt, tjänst eller affär bidrar till att täcka fasta kostnader och skapa vinst."},
   {question:"Vad visar Ansoff-matrisen?",options:["Tillväxtstrategier utifrån produkter och marknader","Likviditet i relation till skulder","Kundens acceptfrist i avtal","Säljarens provision per månad"],correct:0,explanation:"Ansoff innehåller marknadspenetration, marknadsutveckling, produktutveckling och diversifiering."},
   {question:"Vad är ett vanligt skäl till misslyckat försäljningsarbete?",options:["Svag behovsanalys och otydlig målgrupp","För tydlig uppföljning","För bra förståelse för kunden","För hög relevans i erbjudandet"],correct:0,explanation:"Många affärer misslyckas när säljaren presenterar lösning för tidigt eller inte når rätt beslutsfattare."},
   {question:"Vad används en pipeline till?",options:["Att följa affärsmöjligheter genom säljprocessens steg","Att skriva årsredovisningens revisionsberättelse","Att räkna ut soliditet","Att formulera lagkrav i upphandling"],correct:0,explanation:"Pipeline hjälper säljaren prioritera, prognostisera och se var affärer fastnar."},
-  {question:"Vad betyder RFP?",options:["Request for Proposal","Request for Payment","Revenue Forecast Plan","Resultat från Projekt"],correct:0,explanation:"RFP är en förfrågan där kunden ber leverantörer lämna lösningsförslag, pris och villkor."},
-  {question:"Vad betyder EBIT?",options:["Rörelseresultat före räntor och skatt","Eget kapital dividerat med tillgångar","En typ av offentlig upphandling","En modell för kundsegmentering"],correct:0,explanation:"EBIT står för Earnings Before Interest and Taxes och återfinns i resultaträkningen."},
+  {question:"Vad betyder RFP?",options:["Request for Proposal","Request for Payment","Revenue Forecast Plan","Resultat från Projekt"],correct:0,explanation:"RFP står för Request for Proposal. Det är en förfrågan där kunden ber leverantörer lämna lösningsförslag, pris och villkor."},
+  {question:"Vad betyder EBIT?",options:["Rörelseresultat före räntor och skatt","Eget kapital dividerat med tillgångar","En typ av offentlig upphandling","En modell för kundsegmentering"],correct:0,explanation:"EBIT står för Earnings Before Interest and Taxes, alltså rörelseresultat före räntor och skatt. Det visar hur lönsam den löpande verksamheten är innan finansiering och skatt räknas in."},
   {question:"Vad beskriver en affärsplan?",options:["Idé, mål, kunder, erbjudande, marknad, resurser, ekonomi och aktiviteter","Endast företagets logotyp","Bara en lista med kalla samtal","Enbart sekretessvillkor"],correct:0,explanation:"Affärsplanen visar hur företaget ska skapa värde, nå kunder och bli lönsamt."},
   {question:"Vilken fråga är en problemfråga?",options:["Vad fungerar dåligt i ert nuvarande arbetssätt?","Vilka system använder ni idag?","Vill ni starta i juni eller augusti?","Vad står EBIT för?"],correct:0,explanation:"Problemfrågor hittar svårigheter och brister som kan skapa behov av lösning."},
   {question:"Vad är en förvaltningsberättelse?",options:["En del av årsredovisningen som beskriver viktiga händelser och sammanhang","Ett muntligt säljargument i offertmöte","En teknisk kravlista i RFP","En prislista för ramavtal"],correct:0,explanation:"Förvaltningsberättelsen ger kontext till siffrorna och beskriver utveckling, risker och händelser."},
@@ -127,11 +133,11 @@ const questions = [
   {question:"Hur kan man hantera en prisinvändning?",options:["Lyssna, bekräfta, fråga vad kunden jämför med och visa värdet","Sänka priset direkt utan motprestation","Byta ämne till företagets vision","Ignorera invändningen"],correct:0,explanation:"Invändningar bör förstås innan de bemöts. Ofta behöver säljaren koppla tillbaka till behov och kundnytta."},
   {question:"Vad är viktigt vid förhandlingsteknik?",options:["BATNA, målpris, smärtgräns, intressen och eftergifter mot motprestation","Att alltid acceptera kundens första krav","Att aldrig förbereda alternativ","Att bara prata om företagets historia"],correct:0,explanation:"Förhandling kräver förberedelse och förståelse för både egna gränser och motpartens intressen."},
   {question:"Vad är ett alternativavslut?",options:["Att göra beslutet konkret genom att ge två möjliga vägar framåt","Att avsluta relationen utan uppföljning","Att ändra balansräkningen","Att välja bort alla motprestationer"],correct:0,explanation:"Alternativavslut kan till exempel vara: vill ni starta i juni eller augusti?"},
-  {question:"Vad står SPIN för?",options:["Situation, Problem, Implication och Need-payoff","Sales, Price, Invoice och Net profit","Strategy, Pipeline, Interest och Negotiation","Soliditet, Prognos, Intäkt och Nollpunkt"],correct:0,explanation:"SPIN är en frågemodell som leder från nuläge till problem, konsekvens och värde av lösning."},
+  {question:"Vad står SPIN för?",options:["Situation, Problem, Implication och Need-payoff","Sales, Price, Invoice och Net profit","Strategy, Pipeline, Interest och Negotiation","Soliditet, Prognos, Intäkt och Nollpunkt"],correct:0,explanation:"SPIN står för Situation, Problem, Implication och Need-payoff. Det är en frågemodell där säljaren först förstår nuläget, sedan problemet, därefter konsekvensen av problemet och till sist nyttan med lösningen."},
   {question:"Vad skiljer Insight selling från många andra säljmodeller?",options:["Säljaren tillför nya insikter som kunden inte själv formulerat","Säljaren undviker att förstå kundens behov","Säljaren använder bara standardrabatter","Säljaren fokuserar enbart på bokföring"],correct:0,explanation:"Insight selling hjälper kunden se problem, risker eller möjligheter på ett nytt sätt."},
   {question:"Vad kan ingå i en konkurrentanalys?",options:["Konkurrenters erbjudanden, priser, målgrupper, styrkor, svagheter och positionering","Endast företagets egna leverantörsfakturor","Bara anbudets acceptfrist","Enbart kassalikviditet"],correct:0,explanation:"Konkurrentanalys hjälper företaget förstå hur det kan differentiera sig och argumentera bättre."},
   {question:"Vad gäller marknadsföringslagen för?",options:["Marknadsföring av produkter, tjänster och erbjudanden från företag och andra aktörer","Endast intern personalpolitik","Bara årsredovisningar","Endast muntliga ramavtal"],correct:0,explanation:"Lagen gäller kommunikation som syftar till att främja försäljning eller tillgång till produkter och tjänster."},
-  {question:"Vad är ett NDA?",options:["Ett sekretessavtal som skyddar känslig information","Ett mått på lönsamhet före skatt","En modell för marknadstillväxt","Ett offentligt utvärderingskriterium"],correct:0,explanation:"NDA betyder Non-Disclosure Agreement och används när parter delar känslig information."},
+  {question:"Vad är ett NDA?",options:["Ett sekretessavtal som skyddar känslig information","Ett mått på lönsamhet före skatt","En modell för marknadstillväxt","Ett offentligt utvärderingskriterium"],correct:0,explanation:"NDA står för Non-Disclosure Agreement, alltså sekretessavtal. Det används när parter delar känslig information och vill avtala om att informationen inte får spridas vidare."},
   {question:"Vilka steg ingår i offentlig upphandling?",options:["Behovsanalys, dokument, annonsering, anbud, utvärdering och avtal","Cold call, demo, rabatt och årsredovisning","Vision, mission, värderingar och ESP","Resultat, balans, revision och utdelning"],correct:0,explanation:"Upphandlingsprocessen är reglerad och kräver att leverantören följer krav och tidsfrister."},
   {question:"Vilka kriterier används enligt LOU?",options:["Bästa förhållande mellan pris och kvalitet, kostnad eller pris","Endast säljarens personliga relation","Alltid högsta pris","Enbart företagets varumärkesfärg"],correct:0,explanation:"Efter att skallkrav är uppfyllda används utvärderingskriterier för att välja bästa godkända anbud."},
   {question:"Vad är särskilt förbjudet i marknadsföringslagen?",options:["Vilseledande och aggressiv marknadsföring","Tydlig information om ansvarig avsändare","Korrekt prisinformation","Sanna påståenden om produkten"],correct:0,explanation:"Marknadsföring får inte vilseleda kunden eller pressa kunden på ett otillbörligt sätt."},
@@ -142,6 +148,7 @@ const questions = [
 let quizQuestions = [];
 let currentIndex = 0;
 let score = 0;
+let maxScore = 0;
 let answered = false;
 
 const counter = document.getElementById('counter');
@@ -166,11 +173,115 @@ function shuffle(items) {
   return copy;
 }
 
+const inputQuestionData = {
+  "Vad betyder FAB?": {acceptedAnswers:["feature advantage benefit","feature, advantage och benefit","egenskap fördel kundnytta","egenskap, fördel och kundnytta"], requiredTerms:["feature","advantage","benefit"], bonus:1},
+  "Vad används PESTLIED till?": {acceptedAnswers:["att analysera externa omvärldsfaktorer","omvärldsanalys av externa faktorer","politiska ekonomiska sociala tekniska legala internationella ekologiska demografiska"], requiredTerms:["externa","faktorer"], bonus:1},
+  "Vad ingår i 5P?": {acceptedAnswers:["produkt pris plats påverkan personal","produkt pris plats påverkan process","produkt, pris, plats, påverkan och personal"], requiredTerms:["produkt","pris","plats","påverkan"], bonus:1},
+  "Vad betyder RFI?": {acceptedAnswers:["request for information","informationsförfrågan"], requiredTerms:["information"], bonus:1},
+  "Vad står TB för?": {acceptedAnswers:["täckningsbidrag","särintäkt minus särkostnad"], requiredTerms:["täckningsbidrag"], bonus:1},
+  "Vad betyder RFP?": {acceptedAnswers:["request for proposal","förfrågan om förslag"], requiredTerms:["proposal"], bonus:1},
+  "Vad betyder EBIT?": {acceptedAnswers:["earnings before interest and taxes","rörelseresultat före räntor och skatt","resultat före räntor och skatt"], requiredTerms:["räntor","skatt"], bonus:1},
+  "Vad står SPIN för?": {acceptedAnswers:["situation problem implication need-payoff","situation, problem, implication och need-payoff","situation problem implication need payoff"], requiredTerms:["situation","problem","implication","need"], bonus:1},
+  "Vad är ett NDA?": {acceptedAnswers:["non disclosure agreement","non-disclosure agreement","sekretessavtal"], requiredTerms:["sekretess"], bonus:1}
+};
+
+const questionOptionOverrides = {
+  "Vilka målgrupper omfattas av marknadsföringslagen?": ["Både konsumenter och näringsidkare som påverkas av marknadsföring","Endast konsumenter, eftersom lagen främst skyddar privatpersoner","Endast näringsidkare när marknadsföringen sker mellan företag","Endast kunder som redan har ingått avtal med företaget"],
+  "Vad beskriver vision, mission och värderingar?": ["Vision är framtidsbild, mission är uppdrag och värderingar styr hur företaget agerar","Vision är uppdrag, mission är framtidsbild och värderingar är ekonomiska mål","Vision är affärsidé, mission är marknadsplan och värderingar är kundsegment","Vision är positionering, mission är säljmål och värderingar är produktlöften"],
+  "Vad ligger i begreppet affärsidé?": ["Vad företaget gör, för vem, hur värde skapas och varför kunden ska välja företaget","Vilka interna resurser företaget har och hur årsbudgeten ska följas upp","Vilka juridiska villkor företaget använder i anbud, accept och avtal","Hur företaget utformar kampanjer, kanaler och grafisk kommunikation"],
+  "Vilken roll kan en presales-konsult ha i konsultförsäljning?": ["Stödja sälj med teknisk behovsförståelse och lösningsförslag","Ta över säljarens avslut och förhandla slutpris utan tekniskt ansvar","Ansvara för kundens interna beslut, budget och leverantörsval","Granska avtalsrättsliga villkor efter att affären är signerad"],
+  "Vad visar resultaträkningen?": ["Intäkter, kostnader och resultat under en period","Tillgångar, skulder och eget kapital vid en viss tidpunkt","Inbetalningar och utbetalningar för att visa betalningsförmåga","Budgeterade intäkter och kostnader innan perioden har börjat"],
+  "Vad innehåller begreppet affärsmannaskap?": ["Kundvärde, lönsamhet, ansvar, relationer och hållbara affärer","Säljaktivitet, rabattnivå, kampanjtryck och kortsiktig omsättning","Juridiska villkor, upphandling, anbud och accept utan kundanalys","Intern budgetdisciplin, kostnadskontroll och redovisningsprinciper"],
+  "Vad visar kassalikviditet?": ["Företagets kortsiktiga betalningsförmåga","Företagets lönsamhet före räntor och skatt","Företagets finansiering med eget kapital","Företagets resultat efter fasta och rörliga kostnader"],
+  "Vad innebär konsultmässighet?": ["Att agera professionellt, förstå kundbehov, skapa nytta och ta ansvar för leverans","Att fokusera på debiterbara timmar även när kundnyttan är oklar","Att främst sälja standardlösningar utan djupare behovsanalys","Att låta kunden själv formulera lösningen och sedan leverera exakt den"],
+  "Vad innebär ett ramavtal?": ["Övergripande villkor för framtida köp eller avrop","Ett avtal som alltid gäller en enda leverans utan framtida köp","Ett muntligt löfte om att förhandla pris vid senare tillfälle","En offertmall som inte blir bindande förrän fakturan skickas"],
+  "Vilket kännetecken stämmer bäst på aktiebolag?": ["Bolaget är en juridisk person och ägarna har normalt begränsat ansvar","Ägarna ansvarar alltid personligen och solidariskt för bolagets skulder","Bolaget saknar formella krav på redovisning och eget kapital","Företagsformen används bara för ideella verksamheter utan vinstsyfte"],
+  "Vad innebär cold calls?": ["Kontakt med potentiella kunder utan tidigare visat intresse","Kontakt med befintliga kunder som redan har köpt lösningen","Kontakt efter att kunden skickat en formell offertförfrågan","Kontakt med beslutsfattare efter att avtal redan har signerats"],
+  "Vad är projektekonomi?": ["Ekonomin i ett enskilt projekt, till exempel budget, timmar, intäkter och risk","Företagets totala ekonomi sammanfattad i årsredovisningen","Kundens upplevda värde av projektet efter leverans","Marknadens betalningsvilja för liknande projekt hos konkurrenter"],
+  "Vad är ett skallkrav i offentlig upphandling?": ["Ett krav som måste uppfyllas för att anbudet ska kunna prövas","Ett önskemål som kan ge extra poäng men inte krävs för prövning","Ett prisvillkor som leverantören får justera efter sista anbudsdag","Ett förhandlingskrav som diskuteras först efter tilldelningsbeslut"],
+  "Vad innebär paketering av ett erbjudande?": ["Att göra erbjudandet tydligt genom målgrupp, innehåll, pris, funktioner och nytta","Att bara byta namn på tjänsten så att den låter mer attraktiv","Att skapa fler valmöjligheter utan att ändra pris, innehåll eller nytta","Att flytta fokus från kundens behov till företagets interna resurser"],
+  "Vilka delar ingår normalt i en årsredovisning?": ["Balansräkning, resultaträkning, förvaltningsberättelse och revisionsberättelse","Resultatbudget, likviditetsbudget, marknadsplan och säljpipeline","Affärsidé, SWOT, PESTLIED och konkurrentanalys","Anbud, accept, ramavtal och sekretessavtal"],
+  "Vilken köparroll bedömer ofta krav och lösning tekniskt?": ["Teknisk beslutsfattare","Ekonomisk beslutsfattare","Formell undertecknare","Daglig användare utan kravansvar"],
+  "Vad är differentiering?": ["Hur företaget skiljer sig från konkurrenter på ett värdefullt sätt","Hur företaget väljer prisnivå utifrån fasta och rörliga kostnader","Hur kunden går från behovsanalys till accept av offert","Hur säljaren delar upp pipeline efter sannolikhet och värde"],
+  "Hur räknar man ut eget kapital?": ["Tillgångar minus skulder","Intäkter minus kostnader","Omsättning minus rörliga kostnader","Pris minus inköpskostnad"],
+  "Vad skiljer USP från ESP?": ["USP är rationellt säljargument medan ESP är känslomässigt värde","USP är kundens upplevda nytta medan ESP är produktens tekniska egenskap","USP används i förhandling medan ESP används i offentlig upphandling","USP beskriver målgrupp medan ESP beskriver distributionskanal"],
+  "Vilket är ett exempel på omsättningstillgång?": ["Kundfordringar eller pengar på banken","Maskiner och inventarier som används under flera år","Aktiekapital och annat bundet eget kapital","Långfristiga lån som ska betalas efter flera år"],
+  "Vad är skillnaden mellan multikanal och omnikanal?": ["Omnikanal innebär att kanalerna hänger ihop; multikanal innebär flera kanaler","Multikanal innebär att kanalerna hänger ihop; omnikanal innebär bara flera separata kanaler","Omnikanal betyder att företaget bara använder digitala kanaler; multikanal betyder både digitalt och fysiskt","Multikanal och omnikanal betyder samma sak, men omnikanal används främst i B2B-försäljning"],
+  "Varför används kundsegmenteringsstrategier?": ["För att bearbeta olika kunder på olika sätt utifrån potential och lönsamhet","För att alla kunder ska få samma erbjudande, pris och uppföljning","För att ersätta behovsanalys med generell masskommunikation","För att bara dela kunder efter bransch utan att väga in värde"],
+  "Varför är kundens köpprocess viktig för säljaren?": ["Den visar var kunden befinner sig och vilken typ av stöd säljaren bör ge","Den visar säljarens interna aktivitetsmål och provisionsnivå","Den avgör vilket juridiskt avtal som alltid ska användas","Den ersätter behovsanalysen när kunden redan känner till leverantören"],
+  "Vad är bundet eget kapital?": ["Kapital som normalt inte får delas ut till ägarna","Likvida medel som företaget kan använda till löpande betalningar","Kundfordringar som väntas betalas inom kort","Rörliga kostnader som binds till en viss produkt"],
+  "Vad visar Ansoff-matrisen?": ["Tillväxtstrategier utifrån produkter och marknader","Interna styrkor och svagheter samt externa möjligheter och hot","Externa omvärldsfaktorer som påverkar affärsidén","Säljprocessens steg från prospektering till uppföljning"],
+  "Vad är ett vanligt skäl till misslyckat försäljningsarbete?": ["Svag behovsanalys och otydlig målgrupp","För tydlig segmentering och för mycket kundförståelse","För stark uppföljning efter leverans och för tydligt nästa steg","För bra koppling mellan lösning, nytta och beslutsfattare"],
+  "Vad används en pipeline till?": ["Att följa affärsmöjligheter genom säljprocessens steg","Att analysera externa trender som påverkar marknaden","Att visa intäkter, kostnader och resultat för en period","Att reglera framtida avrop i ett ramavtal"],
+  "Vad beskriver en affärsplan?": ["Idé, mål, kunder, erbjudande, marknad, resurser, ekonomi och aktiviteter","Enbart företagets vision, mission och värderingar","Enbart budget, likviditet och ekonomiska nyckeltal","Enbart säljsamtalets frågor, invändningar och avslut"],
+  "Vilken fråga är en problemfråga?": ["Vad fungerar dåligt i ert nuvarande arbetssätt?","Vilka system och leverantörer använder ni idag?","Vad händer om problemet fortsätter i sex månader till?","Vill ni starta inför sommaren eller efter semestern?"],
+  "Vad är en förvaltningsberättelse?": ["En del av årsredovisningen som beskriver viktiga händelser och sammanhang","En del av budgeten som visar planerade inbetalningar och utbetalningar","En del av offerten som beskriver lösningsförslag och pris","En del av upphandlingen som visar samtliga skallkrav"],
+  "Vad är rätt ordning i en generell säljprocess?": ["Prospektering, förberedelse, kontakt, behovsanalys, presentation, invändningar, avslut, uppföljning","Förberedelse, presentation, prospektering, avslut, kontakt, invändningar, behovsanalys, uppföljning","Kontakt, avslut, presentation, behovsanalys, prospektering, uppföljning, förberedelse, invändningar","Behovsanalys, prospektering, uppföljning, kontakt, presentation, förberedelse, avslut, invändningar"],
+  "Vad ingår i marknadsföring?": ["Aktiviteter som skapar kännedom, intresse och efterfrågan","Endast personlig försäljning när kunden redan begärt offert","Endast prissättning och rabattstrategi i avslutsfasen","Endast avtal, leveransvillkor och kundens accept"],
+  "Vad är en revisionsberättelse?": ["Revisorns bedömning av årsredovisning och förvaltning","Företagets egen beskrivning av viktiga händelser under året","En budgetrapport som jämför planerade och faktiska kostnader","En säljrappport som visar pipeline och sannolikhet per affär"],
+  "Vad bör ett lösningsförslag till kund innehålla?": ["Behov, lösning, nyttor, leverans, tidplan, pris, ansvar och villkor","Produktens alla funktioner, men utan kundens nuläge eller mål","Pris, rabatt och leveransdatum, men inte ansvar eller villkor","Företagets bakgrund, referenser och vision, men inte lösningens nytta"],
+  "Vad är en marknadsplan?": ["En plan för målgrupp, budskap, aktiviteter, budget och uppföljning","En plan för resultat, balansräkning och revisionsberättelse","En plan för anbud, accept, avtalsbrott och sekretess","En plan för säljsamtalets invändningar och avslutsteknik"],
+  "Vad visar en likviditetsbudget?": ["Förväntade inbetalningar och utbetalningar över tid","Förväntade intäkter och kostnader oavsett betalningstidpunkt","Tillgångar, skulder och eget kapital vid en viss tidpunkt","Omsättning, marknadsandel och kundsegment under året"],
+  "Vad är en prognos?": ["En uppdaterad bedömning av framtida utfall","En fast budget som inte ändras under perioden","En historisk rapport över redan avslutade affärer","En juridiskt bindande offert till kunden"],
+  "Vad är en affärsmodell?": ["Hur företaget skapar, levererar och tjänar pengar på värde","Hur företaget formulerar vision, mission och värderingar","Hur säljaren strukturerar frågor i ett kundmöte","Hur kunden formellt accepterar ett anbud"],
+  "Vad kännetecknar vinnande argumentation?": ["Den kopplar argument till kundens behov, nytta, bevis och ekonomisk effekt","Den börjar med priset och kopplar nyttan först om kunden invänder","Den fokuserar på tekniska egenskaper utan att fråga om kundens situation","Den undviker jämförelser, bevis och ekonomiska konsekvenser"],
+  "Hur används SWOT?": ["För att förstå interna styrkor/svagheter och externa möjligheter/hot","För att analysera politiska, ekonomiska och tekniska omvärldsfaktorer","För att strukturera säljsamtalets situation, problem och nytta","För att räkna ut marginal, pålägg och täckningsbidrag"],
+  "Varför gör man ett Business Case?": ["För att bedöma nyttor, kostnader, risker och om en satsning är motiverad","För att beskriva kundens känslomässiga köpmotiv före säljmötet","För att ersätta budget och kalkyl med en mer generell idébeskrivning","För att formulera anbud, accept och sekretessvillkor i avtalet"],
+  "Hur kan man hantera en prisinvändning?": ["Lyssna, bekräfta, fråga vad kunden jämför med och visa värdet","Sänka priset direkt för att minska risken att affären går förlorad","Byta fokus till företagets historik och undvika prisdiskussionen","Avsluta samtalet och återkomma först när kunden accepterat priset"],
+  "Vad är viktigt vid förhandlingsteknik?": ["BATNA, målpris, smärtgräns, intressen och eftergifter mot motprestation","Att börja med sin smärtgräns för att visa transparens mot motparten","Att ge eftergifter tidigt så att relationen stärks innan värdet diskuteras","Att fokusera på positioner och undvika frågor om bakomliggande intressen"],
+  "Vad är ett alternativavslut?": ["Att göra beslutet konkret genom att ge två möjliga vägar framåt","Att avsluta affären genom att sammanfatta kundens problem","Att ge kunden rabatt om den accepterar utan fler frågor","Att fråga kunden vad som händer om problemet inte löses"],
+  "Vad skiljer Insight selling från många andra säljmodeller?": ["Säljaren tillför nya insikter som kunden inte själv formulerat","Säljaren väntar tills kunden själv har beskrivit exakt lösning","Säljaren fokuserar främst på behov kunden redan känner till","Säljaren undviker att utmana kundens nuläge eller antaganden"],
+  "Vad kan ingå i en konkurrentanalys?": ["Konkurrenters erbjudanden, priser, målgrupper, styrkor, svagheter och positionering","Kundens inbetalningar, utbetalningar, budget och kassalikviditet","Säljarens öppna frågor, följdfrågor, invändningar och avslut","Anbudets skallkrav, acceptfrist, sekretess och avtalsbrott"],
+  "Vad gäller marknadsföringslagen för?": ["Marknadsföring av produkter, tjänster och erbjudanden från företag och andra aktörer","Endast reklam riktad till privatpersoner i digitala kanaler","Endast prisinformation i offentliga upphandlingar","Endast kundkommunikation efter att avtal har ingåtts"],
+  "Vilka steg ingår i offentlig upphandling?": ["Behovsanalys, dokument, annonsering, anbud, utvärdering och avtal","Annonsering, muntlig förhandling, fri prisjustering, accept och direkt avrop","Behovsanalys, offertmöte, rabattförhandling, muntligt beslut och leveransstart","Kravlista, leverantörsval, anbudstid efter beslut, prisdialog och avtal utan utvärdering"],
+  "Vilka kriterier används enligt LOU?": ["Bästa förhållande mellan pris och kvalitet, kostnad eller pris","Endast lägsta pris, även om kvalitet är ett angivet krav","Endast leverantörens tidigare relation till upphandlande organisation","Endast högsta kvalitet, utan hänsyn till pris eller kostnad"],
+  "Vad är särskilt förbjudet i marknadsföringslagen?": ["Vilseledande och aggressiv marknadsföring","Jämförande marknadsföring som är saklig och kan styrkas","Marknadsföring som tydligt anger pris, villkor och avsändare","Erbjudanden som beskriver både fördelar och begränsningar"],
+  "Vad består ramverket för scenarioplanering av?": ["Scenarioanalys, effektanalys och handlingsplaner","SWOT, målgruppsval, prisstrategi och kundsegmentering","Budget, prognos, resultaträkning och kassalikviditet","Anbud, accept, ramavtal och upphandlingsdokument"],
+  "Vad ligger i begreppet marknadsföring?": ["Att nå målgrupper, kommunicera värde och skapa efterfrågan","Att enbart sälja personligen till kunder som redan har beslutat köp","Att främst skriva avtal, villkor och sekretessklausuler","Att endast analysera interna kostnader och ekonomiskt resultat"]
+};
+
+const distractorSets = {
+  juridik:["Ett frivilligt önskemål som kan ändras efter att anbudstiden gått ut","Ett internt avtalsutkast som inte påverkar parternas bundenhet","En förhandlingsprincip som bara gäller om parterna är överens muntligt"],
+  ekonomi:["En post som visar företagets marknadsposition snarare än pengar","Ett nyckeltal som mäter kundvärde men inte betalningsförmåga","En budgetrad som bara visar planerade aktiviteter, inte ekonomiskt utfall"],
+  salj:["Ett steg där säljaren presenterar lösningen innan behovet är analyserat","En metod där säljaren främst argumenterar med produktens egenskaper","Ett arbetssätt där uppföljning ersätter behovsanalys och invändningshantering"],
+  strategi:["En modell som främst beskriver interna säljsamtal och avslutsteknik","En kalkyl som räknar fram produktens täckningsbidrag och nollpunkt","En avtalsmodell som avgör om anbud och accept har blivit bindande"],
+  marknad:["Ett arbetssätt där alla kanaler används separat utan gemensam kundbild","En segmenteringsmodell som bara delar kunder efter företagets interna kostnader","En positioneringsmetod som främst beskriver juridiska villkor i erbjudandet"]
+};
+
+function categoryForQuestion(question) {
+  const q = question.toLowerCase();
+  if (/lag|avtal|anbud|accept|upphandling|lou|nda|ramavtal|skallkrav/.test(q)) return 'juridik';
+  if (/resultat|kassa|likvid|kapital|tb|ebit|budget|prognos|årsredovisning|revision|projektekonomi/.test(q)) return 'ekonomi';
+  if (/sälj|köpprocess|pipeline|cold|presales|invändning|förhandling|spin|argumentation|avslut/.test(q)) return 'salj';
+  if (/swot|pest|affärsidé|affärsplan|affärsmodell|vision|mission|ansoff|scenario/.test(q)) return 'strategi';
+  return 'marknad';
+}
+
+function harderOptionsFor(item) {
+  const correctText = item.options[item.correct];
+  const category = categoryForQuestion(item.question);
+  return [correctText, ...distractorSets[category]];
+}
+
+function normalizeAnswer(value) {
+  return value.toLowerCase().replace(/[åä]/g,'a').replace(/ö/g,'o').replace(/[^a-z0-9\s-]/g,' ').replace(/\s+/g,' ').trim();
+}
+
+function isInputCorrect(value, item) {
+  const normalized = normalizeAnswer(value);
+  const accepted = (item.acceptedAnswers || []).map(normalizeAnswer);
+  const required = (item.requiredTerms || []).map(normalizeAnswer);
+  return accepted.includes(normalized) || (required.length > 0 && required.every(term => normalized.includes(term)));
+}
 function startQuiz() {
   quizQuestions = shuffle(questions).map(item => {
-    const options = item.options.map((text, index) => ({ text, correct: index === item.correct }));
-    return { ...item, shuffledOptions: shuffle(options) };
+    const inputData = inputQuestionData[item.question];
+    if (inputData) return { ...item, ...inputData, type: 'input' };
+    const hardOptions = harderOptionsFor(item);
+    const options = hardOptions.map((text, index) => ({ text, correct: index === 0 }));
+    return { ...item, options: hardOptions, correct: 0, shuffledOptions: shuffle(options) };
   });
+  maxScore = quizQuestions.reduce((total, item) => total + 1 + (item.type === 'input' ? (item.bonus || 0) : 0), 0);
   currentIndex = 0;
   score = 0;
   quizEl.style.display = 'block';
@@ -182,7 +293,7 @@ function showQuestion() {
   const item = quizQuestions[currentIndex];
   answered = false;
   counter.textContent = `Fråga ${currentIndex + 1} av ${quizQuestions.length}`;
-  scoreEl.textContent = `Rätt: ${score}`;
+  scoreEl.textContent = `Poäng: ${score}/${maxScore}`;
   progressBar.style.width = `${((currentIndex + 1) / quizQuestions.length) * 100}%`;
   questionEl.textContent = item.question;
   optionsEl.innerHTML = '';
@@ -190,6 +301,31 @@ function showQuestion() {
   feedbackEl.innerHTML = '';
   nextBtn.disabled = true;
   nextBtn.textContent = currentIndex === quizQuestions.length - 1 ? 'Visa resultat' : 'Nästa fråga';
+
+  if (item.type === 'input') {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'input-answer';
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.placeholder = 'Skriv ditt svar här';
+    input.setAttribute('aria-label', 'Skriv ditt svar');
+    const hint = document.createElement('p');
+    hint.className = 'hint';
+    hint.textContent = 'Skrivfråga: rätt svar ger 1 poäng + bonuspoäng om svaret innehåller kärnbegreppen.';
+    const checkBtn = document.createElement('button');
+    checkBtn.type = 'button';
+    checkBtn.className = 'primary';
+    checkBtn.textContent = 'Kontrollera svar';
+    checkBtn.addEventListener('click', () => checkInputAnswer(input, checkBtn, item));
+    input.addEventListener('keydown', event => {
+      if (event.key === 'Enter') checkInputAnswer(input, checkBtn, item);
+    });
+    wrapper.append(input, hint, checkBtn);
+    optionsEl.appendChild(wrapper);
+    input.focus();
+    return;
+  }
+
   item.shuffledOptions.forEach(option => {
     const button = document.createElement('button');
     button.type = 'button';
@@ -198,6 +334,21 @@ function showQuestion() {
     button.addEventListener('click', () => chooseAnswer(button, option, item));
     optionsEl.appendChild(button);
   });
+}
+
+function checkInputAnswer(input, checkBtn, item) {
+  if (answered) return;
+  answered = true;
+  const correct = isInputCorrect(input.value, item);
+  input.disabled = true;
+  checkBtn.disabled = true;
+  if (correct) score += 1 + (item.bonus || 0);
+  scoreEl.textContent = `Poäng: ${score}/${maxScore}`;
+  const bonusText = correct && item.bonus ? ` Du fick även ${item.bonus} bonuspoäng.` : '';
+  const correctAnswer = item.options ? item.options[item.correct] : item.acceptedAnswers[0];
+  feedbackEl.innerHTML = `<strong>${correct ? 'Rätt svar' : 'Svarsmall'}</strong><br>Svar: ${correctAnswer}<br><br>${item.explanation}${bonusText}`;
+  feedbackEl.style.display = 'block';
+  nextBtn.disabled = false;
 }
 
 function chooseAnswer(button, option, item) {
@@ -215,9 +366,9 @@ function chooseAnswer(button, option, item) {
   } else {
     button.classList.add('wrong');
   }
-  scoreEl.textContent = `Rätt: ${score}`;
+  scoreEl.textContent = `Poäng: ${score}/${maxScore}`;
   const correctAnswer = item.options[item.correct];
-  feedbackEl.innerHTML = `<strong>${option.correct ? 'Rätt svar' : 'Rätt svar'}</strong><br>${correctAnswer}<br><br>${item.explanation}`;
+  feedbackEl.innerHTML = `<strong>Rätt svar</strong><br>${correctAnswer}<br><br>${item.explanation}`;
   feedbackEl.style.display = 'block';
   nextBtn.disabled = false;
 }
@@ -226,8 +377,8 @@ function showResult() {
   progressBar.style.width = '100%';
   quizEl.style.display = 'none';
   resultEl.style.display = 'block';
-  const percent = Math.round((score / quizQuestions.length) * 100);
-  resultScore.textContent = `${score} av ${quizQuestions.length} rätt (${percent}%)`;
+  const percent = Math.round((score / maxScore) * 100);
+  resultScore.textContent = `${score} av ${maxScore} poäng (${percent}%)`;
   if (percent >= 85) {
     resultText.textContent = 'Starkt. Du har bra koll på helheten och kan fokusera på att öva formuleringar inför tenta.';
   } else if (percent >= 65) {
