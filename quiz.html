@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="sv">
 <head>
 <meta charset="UTF-8">
@@ -133,7 +133,7 @@ const questions = [
   {question:"Hur kan man hantera en prisinvändning?",options:["Lyssna, bekräfta, fråga vad kunden jämför med och visa värdet","Sänka priset direkt utan motprestation","Byta ämne till företagets vision","Ignorera invändningen"],correct:0,explanation:"Invändningar bör förstås innan de bemöts. Ofta behöver säljaren koppla tillbaka till behov och kundnytta."},
   {question:"Vad är viktigt vid förhandlingsteknik?",options:["BATNA, målpris, smärtgräns, intressen och eftergifter mot motprestation","Att alltid acceptera kundens första krav","Att aldrig förbereda alternativ","Att bara prata om företagets historia"],correct:0,explanation:"Förhandling kräver förberedelse och förståelse för både egna gränser och motpartens intressen."},
   {question:"Vad är ett alternativavslut?",options:["Att göra beslutet konkret genom att ge två möjliga vägar framåt","Att avsluta relationen utan uppföljning","Att ändra balansräkningen","Att välja bort alla motprestationer"],correct:0,explanation:"Alternativavslut kan till exempel vara: vill ni starta i juni eller augusti?"},
-  {question:"Vad står SPIN för?",options:["Situation, Problem, Implication och Need-payoff","Sales, Price, Invoice och Net profit","Strategy, Pipeline, Interest och Negotiation","Soliditet, Prognos, Intäkt och Nollpunkt"],correct:0,explanation:"SPIN står för Situation, Problem, Implication och Need-payoff. Det är en frågemodell där säljaren först förstår nuläget, sedan problemet, därefter konsekvensen av problemet och till sist nyttan med lösningen."},
+  {question:"Vad står SPIN för?",options:["Situation, Problem, Inverkan och Nytta","Sales, Price, Invoice och Net profit","Strategy, Pipeline, Interest och Negotiation","Soliditet, Prognos, Intäkt och Nollpunkt"],correct:0,explanation:"SPIN står för Situation, Problem, Inverkan och Nytta. Det är en frågemodell där säljaren först förstår nuläget, sedan problemet, därefter vilken inverkan problemet får och till sist nyttan med lösningen."},
   {question:"Vad skiljer Insight selling från många andra säljmodeller?",options:["Säljaren tillför nya insikter som kunden inte själv formulerat","Säljaren undviker att förstå kundens behov","Säljaren använder bara standardrabatter","Säljaren fokuserar enbart på bokföring"],correct:0,explanation:"Insight selling hjälper kunden se problem, risker eller möjligheter på ett nytt sätt."},
   {question:"Vad kan ingå i en konkurrentanalys?",options:["Konkurrenters erbjudanden, priser, målgrupper, styrkor, svagheter och positionering","Endast företagets egna leverantörsfakturor","Bara anbudets acceptfrist","Enbart kassalikviditet"],correct:0,explanation:"Konkurrentanalys hjälper företaget förstå hur det kan differentiera sig och argumentera bättre."},
   {question:"Vad gäller marknadsföringslagen för?",options:["Marknadsföring av produkter, tjänster och erbjudanden från företag och andra aktörer","Endast intern personalpolitik","Bara årsredovisningar","Endast muntliga ramavtal"],correct:0,explanation:"Lagen gäller kommunikation som syftar till att främja försäljning eller tillgång till produkter och tjänster."},
@@ -181,7 +181,7 @@ const inputQuestionData = {
   "Vad står TB för?": {acceptedAnswers:["täckningsbidrag","särintäkt minus särkostnad"], requiredTerms:["täckningsbidrag"], bonus:1},
   "Vad betyder RFP?": {acceptedAnswers:["request for proposal","förfrågan om förslag"], requiredTerms:["proposal"], bonus:1},
   "Vad betyder EBIT?": {acceptedAnswers:["earnings before interest and taxes","earning before interest and taxes","earnings before income and taxes","earning before income and taxes","rörelseresultat före räntor och skatt","resultat före räntor och skatt"], requiredTerms:["before","taxes"], bonus:1},
-  "Vad står SPIN för?": {acceptedAnswers:["situation problem implication need-payoff","situation, problem, implication och need-payoff","situation problem implication need payoff"], requiredTerms:["situation","problem","implication","need"], bonus:1},
+  "Vad står SPIN för?": {acceptedAnswers:["situation problem inverkan nytta","situation, problem, inverkan och nytta","situation problem påverkan nytta","situation problem konsekvens nytta"], requiredTerms:["situation","problem","inverkan","nytta"], bonus:1},
   "Vad är ett NDA?": {acceptedAnswers:["non disclosure agreement","non-disclosure agreement","sekretessavtal"], requiredTerms:["sekretess"], bonus:1}
 };
 
@@ -298,12 +298,12 @@ function wrongReason(item, chosenText) {
   return `Alternativet "${escapeHtml(chosenText)}" är ämnesnära, men det är inte lika komplett eller träffsäkert som rätt svar. På tenta behöver du välja det alternativ som bäst besvarar exakt det frågan efterfrågar.`;
 }
 
-function renderFeedback({ correct, item, correctAnswer, chosenText, inputExpected }) {
-  const heading = correct ? 'Rätt svar' : 'Inte riktigt';
-  const chosenLine = chosenText ? `<br>Ditt svar: ${escapeHtml(chosenText)}` : '';
-  const expectedLine = inputExpected ? `<br><br><strong>Svarsmall</strong><br>${escapeHtml(inputExpected)}` : '';
-  const whyWrong = correct ? '' : `<br><br><strong>Varför ditt svar inte räcker</strong><br>${wrongReason(item, chosenText)}`;
-  return `<strong>${heading}</strong>${chosenLine}<br>Svar: ${escapeHtml(correctAnswer)}${expectedLine}<br><br><strong>Förklaring</strong><br>${escapeHtml(buildExplanation(item))}${whyWrong}`;
+function renderFeedback({ correct, item, correctAnswer, chosenText, inputExpected, bonusText }) {
+  const heading = correct ? 'Rätt' : 'Inte riktigt';
+  const answerLine = correct ? '' : `<br>Svar: ${escapeHtml(correctAnswer)}`;
+  const bonusLine = correct && bonusText ? `<br>${escapeHtml(bonusText.trim())}` : '';
+  const expectedLine = !correct && inputExpected ? `<br><br><strong>Svarsmall</strong><br>${escapeHtml(inputExpected)}` : '';
+  return `<strong>${heading}</strong>${answerLine}${bonusLine}${expectedLine}<br><br><strong>Förklaring</strong><br>${escapeHtml(buildExplanation(item))}`;
 }
 function startQuiz() {
   quizQuestions = shuffle(questions).map(item => {
@@ -376,15 +376,16 @@ function checkInputAnswer(input, checkBtn, item) {
   checkBtn.disabled = true;
   if (correct) score += 1 + (item.bonus || 0);
   scoreEl.textContent = `Poäng: ${score}/${maxScore}`;
-  const bonusText = correct && item.bonus ? ` Du fick även ${item.bonus} bonuspoäng.` : '';
+  const bonusText = correct && item.bonus ? `Du fick även ${item.bonus} bonuspoäng.` : '';
   const correctAnswer = item.options ? item.options[item.correct] : item.acceptedAnswers[0];
   const expectedTerms = item.requiredTerms && item.requiredTerms.length ? `Förväntade kärnbegrepp: ${item.requiredTerms.join(', ')}.` : '';
   feedbackEl.innerHTML = renderFeedback({
     correct,
     item,
-    correctAnswer: `${correctAnswer}${bonusText}`,
+    correctAnswer,
     chosenText: input.value,
-    inputExpected: expectedTerms
+    inputExpected: expectedTerms,
+    bonusText
   });
   feedbackEl.style.display = 'block';
   nextBtn.disabled = false;
